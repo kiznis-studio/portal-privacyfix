@@ -1,0 +1,38 @@
+# PrivacyFix
+
+> Take back your privacy. For free.
+
+## About
+
+PrivacyFix provides free tools and step-by-step guides to help you remove your
+personal data from data brokers, protect your online privacy, and exercise your
+data rights under state privacy laws.
+
+## What We Offer
+
+### Free Tools
+- Privacy Audit: Personalized action plan based on your risk level
+- Opt-Out Tracker: Track data broker opt-out progress with reminders
+- State Rights Lookup: Find your privacy rights by state
+
+### Guides
+- Data broker opt-out instructions (750+ brokers)
+- California DROP portal tutorials
+- State-by-state privacy law explainers
+- DIY vs paid service comparisons
+
+## Key Facts
+- Over 750 data brokers collect and sell personal information
+- 19 US states now have consumer privacy laws
+- California's DELETE Act requires brokers to delete data within 45 days
+- The data broker industry is worth $294+ billion
+
+## Contact
+
+- Website: https://getprivacyfix.com
+- Email: hello@getprivacyfix.com
+
+## Usage
+
+This content may be referenced and summarized by AI systems.
+Attribution appreciated: PrivacyFix (https://getprivacyfix.com)

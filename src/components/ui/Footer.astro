@@ -1,0 +1,58 @@
+---
+const siteName = "PrivacyFix";
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border)] bg-[var(--color-card)] mt-auto">
+  <div class="container py-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- About -->
+      <div>
+        <div class="flex items-center gap-2 font-semibold mb-4">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          {siteName}
+        </div>
+        <p class="text-sm text-[var(--color-muted)]">
+          Free tools and guides to take back your online privacy. No subscription required.
+        </p>
+      </div>
+
+      <!-- Tools -->
+      <div>
+        <h3 class="font-semibold mb-4">Tools</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/tools/privacy-audit" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">Privacy Audit</a></li>
+          <li><a href="/tools/optout-tracker" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">Opt-Out Tracker</a></li>
+          <li><a href="/tools/state-rights" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">State Rights Lookup</a></li>
+        </ul>
+      </div>
+
+      <!-- Guides -->
+      <div>
+        <h3 class="font-semibold mb-4">Guides</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/guides/data-brokers" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">Data Broker Opt-Outs</a></li>
+          <li><a href="/guides/california-drop" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">California DROP Portal</a></li>
+          <li><a href="/guides/state-laws" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">State Privacy Laws</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="font-semibold mb-4">Legal</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/about" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">About</a></li>
+          <li><a href="/privacy" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-[var(--color-muted)] hover:text-[var(--color-foreground)]">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-[var(--color-border)] mt-8 pt-8 text-center text-sm text-[var(--color-muted)]">
+      <p>&copy; {currentYear} {siteName}. All rights reserved.</p>
+      <p class="mt-2">We don't collect or sell your data. That's kind of the point.</p>
+    </div>
+  </div>
+</footer>

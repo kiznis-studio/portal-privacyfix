@@ -1,0 +1,35 @@
+# Portal Site Configuration
+# PrivacyFix - Free Privacy Tools & Guides
+
+name: "PrivacyFix"
+tagline: "Take back your privacy. For free."
+description: "Free tools and step-by-step guides to remove your personal data from data brokers, protect your online privacy, and exercise your data rights."
+url: "https://getprivacyfix.com"
+language: "en"
+author: "PrivacyFix Team"
+
+# Theme customization
+theme:
+  accent: "#10b981"        # Emerald green - trust, security
+  font: "system"           # system | inter | jakarta
+  style: "minimal"         # minimal | magazine | blog
+  dark_mode: true          # Enable dark mode toggle
+
+# Social links (optional)
+social:
+  twitter: ""
+  github: ""
+
+# Contact
+contact:
+  email: "hello@getprivacyfix.com"
+
+# Analytics
+analytics:
+  umami:
+    url: "https://analytics.opspixel.com"
+    website_id: ""  # Set after Umami site creation
+
+# Error tracking
+sentry:
+  dsn: ""  # Set after Sentry project creation
