@@ -28,8 +28,8 @@ contact:
 analytics:
   umami:
     url: "https://analytics.opspixel.com"
-    website_id: ""  # Set after Umami site creation
+    website_id: "56bff769-9a2e-457b-aca4-9291e3e47933"
 
 # Error tracking
 sentry:
-  dsn: ""  # Set after Sentry project creation
+  dsn: "https://77d3d974e95b28f1bb9484f753cf3369@o4510827630231552.ingest.de.sentry.io/4510829291503696"
