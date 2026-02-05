@@ -1,0 +1,269 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const breachServices = [
+  {
+    name: "Have I Been Pwned",
+    url: "https://haveibeenpwned.com",
+    description: "The most comprehensive breach database. Check email addresses and phone numbers.",
+    creator: "Troy Hunt (Security Researcher)",
+    free: true,
+    recommended: true
+  },
+  {
+    name: "Firefox Monitor",
+    url: "https://monitor.firefox.com",
+    description: "Mozilla's breach notification service. Uses HIBP data with Firefox integration.",
+    creator: "Mozilla",
+    free: true,
+    recommended: false
+  },
+  {
+    name: "Google Password Checkup",
+    url: "https://passwords.google.com/checkup",
+    description: "Check if your saved Google passwords have been compromised.",
+    creator: "Google",
+    free: true,
+    recommended: false
+  },
+  {
+    name: "Apple Password Monitoring",
+    url: "https://support.apple.com/guide/iphone/automatically-fill-in-strong-passwords-iphf9219f8c7/ios",
+    description: "Built into iOS/macOS. Alerts you if saved passwords appear in breaches.",
+    creator: "Apple",
+    free: true,
+    recommended: false
+  }
+];
+
+const commonBreaches = [
+  { name: "LinkedIn", year: 2021, records: "700M", type: "Scraped data" },
+  { name: "Facebook", year: 2021, records: "533M", type: "Phone numbers, emails" },
+  { name: "Yahoo", year: 2013, records: "3B", type: "Full accounts" },
+  { name: "Marriott", year: 2018, records: "500M", type: "Guest records" },
+  { name: "Adobe", year: 2013, records: "153M", type: "Passwords, emails" },
+  { name: "Equifax", year: 2017, records: "147M", type: "SSN, financial data" },
+];
+---
+
+<Base
+  title="Data Breach Check"
+  description="Check if your email or personal data has been exposed in known data breaches. Free tools and guidance for protecting yourself after a breach."
+>
+  <section class="py-12 md:py-16">
+    <div class="container">
+      <div class="max-w-4xl mx-auto">
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/tools" class="hover:text-emerald-500">Tools</a>
+            <span>/</span>
+            <span>Breach Check</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">Data Breach Check</h1>
+          <p class="text-xl text-[var(--color-muted)]">
+            Find out if your personal data has been exposed in known breaches.
+          </p>
+        </header>
+
+        <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <div>
+              <p class="font-medium text-emerald-700 dark:text-emerald-300">We don't collect your email</p>
+              <p class="text-sm text-[var(--color-muted)]">We link you directly to trusted breach-checking services. Your email never passes through our servers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main CTA -->
+        <div class="p-8 rounded-2xl border-2 border-emerald-500/30 bg-emerald-500/5 mb-8 text-center">
+          <h2 class="text-2xl font-bold mb-3">Check Your Email Now</h2>
+          <p class="text-[var(--color-muted)] mb-6 max-w-lg mx-auto">
+            Have I Been Pwned is the gold standard for breach checking. It's free, trusted by security professionals, and covers billions of breached records.
+          </p>
+          <a
+            href="https://haveibeenpwned.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors text-lg"
+          >
+            Check on Have I Been Pwned
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <p class="text-sm text-[var(--color-muted)] mt-4">
+            Opens in a new tab. Enter your email on their site to check.
+          </p>
+        </div>
+
+        <!-- Other Services -->
+        <div class="mb-12">
+          <h2 class="text-xl font-semibold mb-4">Other Breach Checking Services</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {breachServices.filter(s => !s.recommended).map(service => (
+              <a
+                href={service.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] hover:border-emerald-500/50 transition-colors"
+              >
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 class="font-semibold">{service.name}</h3>
+                    <p class="text-sm text-[var(--color-muted)] mt-1">{service.description}</p>
+                    <p class="text-xs text-[var(--color-muted)] mt-2">By {service.creator}</p>
+                  </div>
+                  <svg class="w-4 h-4 text-[var(--color-muted)] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- What to Do -->
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] mb-8">
+          <h2 class="text-xl font-semibold mb-4">What to Do If You're in a Breach</h2>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                <span class="font-bold text-sm">1</span>
+              </div>
+              <div>
+                <h3 class="font-medium">Change your password immediately</h3>
+                <p class="text-sm text-[var(--color-muted)]">If the breached site shares a password with other accounts, change those too. Use unique passwords for every site.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                <span class="font-bold text-sm">2</span>
+              </div>
+              <div>
+                <h3 class="font-medium">Enable two-factor authentication</h3>
+                <p class="text-sm text-[var(--color-muted)]">Add 2FA to any account that supports it. Use an authenticator app, not SMS if possible.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                <span class="font-bold text-sm">3</span>
+              </div>
+              <div>
+                <h3 class="font-medium">Monitor for suspicious activity</h3>
+                <p class="text-sm text-[var(--color-muted)]">Watch for unexpected emails, login attempts, or account changes. Check your credit report if financial data was exposed.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                <span class="font-bold text-sm">4</span>
+              </div>
+              <div>
+                <h3 class="font-medium">Consider a credit freeze</h3>
+                <p class="text-sm text-[var(--color-muted)]">If sensitive data (SSN, financial info) was exposed, freeze your credit at all three bureaus. It's free.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                <span class="font-bold text-sm">5</span>
+              </div>
+              <div>
+                <h3 class="font-medium">Use a password manager</h3>
+                <p class="text-sm text-[var(--color-muted)]">A password manager generates and stores unique passwords for every site. Popular options: 1Password, Bitwarden, Dashlane.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Major Breaches -->
+        <div class="mb-8">
+          <h2 class="text-xl font-semibold mb-4">Major Data Breaches</h2>
+          <p class="text-[var(--color-muted)] mb-4">
+            If you've ever used these services, your data may have been exposed:
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[var(--color-border)]">
+                  <th class="text-left py-3 px-4 font-semibold">Company</th>
+                  <th class="text-left py-3 px-4 font-semibold">Year</th>
+                  <th class="text-left py-3 px-4 font-semibold">Records</th>
+                  <th class="text-left py-3 px-4 font-semibold">Data Exposed</th>
+                </tr>
+              </thead>
+              <tbody class="text-[var(--color-muted)]">
+                {commonBreaches.map(breach => (
+                  <tr class="border-b border-[var(--color-border)]">
+                    <td class="py-3 px-4 font-medium text-[var(--color-foreground)]">{breach.name}</td>
+                    <td class="py-3 px-4">{breach.year}</td>
+                    <td class="py-3 px-4">{breach.records}</td>
+                    <td class="py-3 px-4">{breach.type}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-[var(--color-muted)] mt-4">
+            This is just a sample. There have been thousands of breaches affecting billions of records.
+          </p>
+        </div>
+
+        <!-- FAQ -->
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]">
+          <h2 class="text-xl font-semibold mb-4">Frequently Asked Questions</h2>
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-medium mb-1">Is Have I Been Pwned safe to use?</h3>
+              <p class="text-sm text-[var(--color-muted)]">
+                Yes. HIBP was created by Troy Hunt, a respected security researcher. Your email is searched against
+                a database of known breaches, but it's not stored or shared. The service is recommended by security
+                experts worldwide.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-medium mb-1">What if my email isn't found?</h3>
+              <p class="text-sm text-[var(--color-muted)]">
+                Good news! Your email hasn't appeared in any known public breaches. However, not all breaches are
+                reported or discovered. Practice good security hygiene regardless.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-medium mb-1">Should I be worried if I'm in a breach?</h3>
+              <p class="text-sm text-[var(--color-muted)]">
+                Don't panic—most people are in multiple breaches. The key is to take action: change affected
+                passwords, enable 2FA, and monitor your accounts. Old breaches with passwords you no longer use
+                are less concerning.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-medium mb-1">Why don't you check breaches directly on this site?</h3>
+              <p class="text-sm text-[var(--color-muted)]">
+                We're a privacy site—we don't want your email passing through our servers. Linking you directly
+                to HIBP means we never see or store your email address. That's the privacy-first approach.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-12 p-8 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 text-center">
+          <h2 class="text-2xl font-bold mb-3">Next Steps</h2>
+          <p class="text-[var(--color-muted)] mb-6 max-w-xl mx-auto">
+            Checked for breaches? Take our Privacy Audit to get a complete action plan for protecting your data.
+          </p>
+          <a
+            href="/tools/privacy-audit"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
+          >
+            Take Privacy Audit
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

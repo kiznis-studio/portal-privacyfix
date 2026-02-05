@@ -31,18 +31,20 @@ const tools = [
     </svg>`,
     tag: "Available",
     tagColor: "emerald"
+  },
+  {
+    title: "Breach Check",
+    description: "See if your email has been exposed in known data breaches. Links to trusted services like Have I Been Pwned.",
+    href: "/tools/breach-check",
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>`,
+    tag: "Available",
+    tagColor: "emerald"
   }
 ];
 
-const comingSoon = [
-  {
-    title: "Breach Check",
-    description: "See if your email or phone has been exposed in known data breaches. Powered by Have I Been Pwned data.",
-    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-    </svg>`
-  }
-];
+const comingSoon: typeof tools = [];
 ---
 
 <Base
