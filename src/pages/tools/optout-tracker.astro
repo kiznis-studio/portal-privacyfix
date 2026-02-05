@@ -1,0 +1,543 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const popularBrokers = [
+  { name: "Spokeo", category: "People Search", url: "https://www.spokeo.com/optout" },
+  { name: "BeenVerified", category: "People Search", url: "https://www.beenverified.com/opt-out" },
+  { name: "Whitepages", category: "People Search", url: "https://www.whitepages.com/suppression-requests" },
+  { name: "Intelius", category: "People Search", url: "https://www.intelius.com/opt-out" },
+  { name: "PeopleFinder", category: "People Search", url: "https://www.peoplefinder.com/optout.php" },
+  { name: "FastPeopleSearch", category: "People Search", url: "https://www.fastpeoplesearch.com/removal" },
+  { name: "TruePeopleSearch", category: "People Search", url: "https://www.truepeoplesearch.com/removal" },
+  { name: "Radaris", category: "People Search", url: "https://radaris.com/control/privacy" },
+  { name: "MyLife", category: "Reputation", url: "https://www.mylife.com/ccpa" },
+  { name: "Acxiom", category: "Marketing Data", url: "https://isapps.acxiom.com/optout/optout.aspx" },
+  { name: "Oracle Data Cloud", category: "Marketing Data", url: "https://www.oracle.com/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html" },
+  { name: "Epsilon", category: "Marketing Data", url: "https://www.epsilon.com/privacy-policy" },
+];
+---
+
+<Base
+  title="Opt-Out Tracker"
+  description="Track your data broker opt-out progress. Get 45-day follow-up reminders and monitor your privacy improvements over time. All data stored locally."
+>
+  <section class="py-12 md:py-16">
+    <div class="container">
+      <div class="max-w-4xl mx-auto">
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/tools" class="hover:text-emerald-500">Tools</a>
+            <span>/</span>
+            <span>Opt-Out Tracker</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">Opt-Out Tracker</h1>
+          <p class="text-xl text-[var(--color-muted)]">
+            Track your data broker removal progress and never miss a follow-up.
+          </p>
+        </header>
+
+        <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <div>
+              <p class="font-medium text-emerald-700 dark:text-emerald-300">Your data stays on your device</p>
+              <p class="text-sm text-[var(--color-muted)]">All tracking data is stored in your browser's localStorage. We never see or store your opt-out history.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Summary -->
+        <div id="stats-summary" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] text-center">
+            <div id="stat-total" class="text-2xl font-bold text-emerald-500">0</div>
+            <div class="text-sm text-[var(--color-muted)]">Total Tracked</div>
+          </div>
+          <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] text-center">
+            <div id="stat-pending" class="text-2xl font-bold text-amber-500">0</div>
+            <div class="text-sm text-[var(--color-muted)]">Pending</div>
+          </div>
+          <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] text-center">
+            <div id="stat-confirmed" class="text-2xl font-bold text-emerald-500">0</div>
+            <div class="text-sm text-[var(--color-muted)]">Confirmed</div>
+          </div>
+          <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] text-center">
+            <div id="stat-followup" class="text-2xl font-bold text-red-500">0</div>
+            <div class="text-sm text-[var(--color-muted)]">Need Follow-up</div>
+          </div>
+        </div>
+
+        <!-- Add New Entry -->
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] mb-8">
+          <h2 class="text-lg font-semibold mb-4">Add Opt-Out Request</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-2">Data Broker</label>
+              <div class="relative">
+                <select id="broker-select" class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                  <option value="">Select a broker or enter custom...</option>
+                  {popularBrokers.map(broker => (
+                    <option value={broker.name} data-url={broker.url} data-category={broker.category}>
+                      {broker.name} ({broker.category})
+                    </option>
+                  ))}
+                  <option value="__custom__">+ Add custom broker</option>
+                </select>
+              </div>
+              <input
+                type="text"
+                id="custom-broker"
+                placeholder="Enter broker name"
+                class="hidden w-full mt-2 px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Date Submitted</label>
+              <input
+                type="date"
+                id="submit-date"
+                class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm font-medium mb-2">Confirmation Number (optional)</label>
+            <input
+              type="text"
+              id="confirmation-number"
+              placeholder="e.g., OPT-12345"
+              class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm font-medium mb-2">Notes (optional)</label>
+            <textarea
+              id="notes"
+              rows="2"
+              placeholder="Any notes about the request..."
+              class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+            ></textarea>
+          </div>
+          <button
+            id="add-entry"
+            class="mt-4 w-full md:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
+          >
+            Add to Tracker
+          </button>
+        </div>
+
+        <!-- Entries List -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold">Your Opt-Out Requests</h2>
+            <div class="flex gap-2">
+              <select id="filter-status" class="px-3 py-2 text-sm rounded-lg border border-[var(--color-border)] bg-[var(--color-background)]">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="followup">Need Follow-up</option>
+              </select>
+              <button id="export-data" class="px-3 py-2 text-sm rounded-lg border border-[var(--color-border)] hover:bg-[var(--color-card)] transition-colors">
+                Export CSV
+              </button>
+            </div>
+          </div>
+
+          <div id="entries-list" class="space-y-3">
+            <!-- Entries will be inserted here via DOM methods -->
+          </div>
+
+          <div id="empty-state" class="hidden p-12 rounded-xl border border-dashed border-[var(--color-border)] text-center">
+            <svg class="w-12 h-12 mx-auto text-[var(--color-muted)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <p class="text-[var(--color-muted)] mb-4">No opt-out requests tracked yet.</p>
+            <p class="text-sm text-[var(--color-muted)]">Start by adding a data broker you've submitted an opt-out request to.</p>
+          </div>
+        </div>
+
+        <!-- Help Section -->
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]">
+          <h2 class="text-lg font-semibold mb-4">How It Works</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-3">
+                <span class="font-bold">1</span>
+              </div>
+              <h3 class="font-medium mb-1">Track Requests</h3>
+              <p class="text-sm text-[var(--color-muted)]">Add each opt-out request as you submit it. Include the date and any confirmation numbers.</p>
+            </div>
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-3">
+                <span class="font-bold">2</span>
+              </div>
+              <h3 class="font-medium mb-1">Monitor Status</h3>
+              <p class="text-sm text-[var(--color-muted)]">After 45 days, requests automatically move to "Need Follow-up" to remind you to verify removal.</p>
+            </div>
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-3">
+                <span class="font-bold">3</span>
+              </div>
+              <h3 class="font-medium mb-1">Confirm Removal</h3>
+              <p class="text-sm text-[var(--color-muted)]">Check each broker's site to verify your data is gone, then mark the request as confirmed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    interface OptOutEntry {
+      id: string;
+      broker: string;
+      category: string;
+      url: string;
+      dateSubmitted: string;
+      confirmationNumber: string;
+      notes: string;
+      status: 'pending' | 'confirmed' | 'followup';
+      createdAt: string;
+    }
+
+    const STORAGE_KEY = 'privacyfix_optout_tracker';
+    const FOLLOWUP_DAYS = 45;
+
+    function getEntries(): OptOutEntry[] {
+      try {
+        const data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveEntries(entries: OptOutEntry[]): void {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    }
+
+    function generateId(): string {
+      return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+
+    function getDaysSince(dateStr: string): number {
+      const date = new Date(dateStr);
+      const now = new Date();
+      const diffTime = now.getTime() - date.getTime();
+      return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    }
+
+    function updateEntryStatuses(entries: OptOutEntry[]): OptOutEntry[] {
+      return entries.map(entry => {
+        if (entry.status === 'pending' && getDaysSince(entry.dateSubmitted) >= FOLLOWUP_DAYS) {
+          return { ...entry, status: 'followup' as const };
+        }
+        return entry;
+      });
+    }
+
+    function updateStats(entries: OptOutEntry[]): void {
+      const total = entries.length;
+      const pending = entries.filter(e => e.status === 'pending').length;
+      const confirmed = entries.filter(e => e.status === 'confirmed').length;
+      const followup = entries.filter(e => e.status === 'followup').length;
+
+      const totalEl = document.getElementById('stat-total');
+      const pendingEl = document.getElementById('stat-pending');
+      const confirmedEl = document.getElementById('stat-confirmed');
+      const followupEl = document.getElementById('stat-followup');
+
+      if (totalEl) totalEl.textContent = total.toString();
+      if (pendingEl) pendingEl.textContent = pending.toString();
+      if (confirmedEl) confirmedEl.textContent = confirmed.toString();
+      if (followupEl) followupEl.textContent = followup.toString();
+    }
+
+    function formatDate(dateStr: string): string {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function createStatusBadge(status: string, dateSubmitted: string): HTMLSpanElement {
+      const days = getDaysSince(dateSubmitted);
+      const daysRemaining = FOLLOWUP_DAYS - days;
+      const badge = document.createElement('span');
+      badge.className = 'px-2 py-1 text-xs rounded-full';
+
+      if (status === 'confirmed') {
+        badge.className += ' bg-emerald-500/10 text-emerald-500';
+        badge.textContent = 'Confirmed';
+      } else if (status === 'followup' || daysRemaining <= 0) {
+        badge.className += ' bg-red-500/10 text-red-500';
+        badge.textContent = 'Need Follow-up';
+      } else if (daysRemaining <= 7) {
+        badge.className += ' bg-orange-500/10 text-orange-500';
+        badge.textContent = `Pending (${daysRemaining} days left)`;
+      } else {
+        badge.className += ' bg-amber-500/10 text-amber-500';
+        badge.textContent = `Pending (${daysRemaining} days left)`;
+      }
+
+      return badge;
+    }
+
+    function createEntryElement(entry: OptOutEntry): HTMLDivElement {
+      const card = document.createElement('div');
+      card.className = 'p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]';
+      card.dataset.id = entry.id;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'flex flex-wrap items-start justify-between gap-4';
+
+      // Left side - info
+      const info = document.createElement('div');
+      info.className = 'flex-1 min-w-[200px]';
+
+      const header = document.createElement('div');
+      header.className = 'flex items-center gap-3 mb-1';
+
+      const title = document.createElement('h3');
+      title.className = 'font-semibold';
+      title.textContent = entry.broker;
+      header.appendChild(title);
+      header.appendChild(createStatusBadge(entry.status, entry.dateSubmitted));
+
+      const meta = document.createElement('p');
+      meta.className = 'text-sm text-[var(--color-muted)]';
+      let metaText = `${entry.category} • Submitted ${formatDate(entry.dateSubmitted)}`;
+      if (entry.confirmationNumber) {
+        metaText += ` • Ref: ${entry.confirmationNumber}`;
+      }
+      meta.textContent = metaText;
+
+      info.appendChild(header);
+      info.appendChild(meta);
+
+      if (entry.notes) {
+        const notes = document.createElement('p');
+        notes.className = 'text-sm text-[var(--color-muted)] mt-1';
+        notes.textContent = entry.notes;
+        info.appendChild(notes);
+      }
+
+      // Right side - actions
+      const actions = document.createElement('div');
+      actions.className = 'flex items-center gap-2';
+
+      if (entry.url) {
+        const checkBtn = document.createElement('a');
+        checkBtn.href = entry.url;
+        checkBtn.target = '_blank';
+        checkBtn.rel = 'noopener noreferrer';
+        checkBtn.className = 'px-3 py-1.5 text-sm rounded-lg border border-[var(--color-border)] hover:bg-[var(--color-background)] transition-colors';
+        checkBtn.textContent = 'Check Site';
+        actions.appendChild(checkBtn);
+      }
+
+      if (entry.status !== 'confirmed') {
+        const confirmBtn = document.createElement('button');
+        confirmBtn.className = 'px-3 py-1.5 text-sm rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white transition-colors';
+        confirmBtn.textContent = 'Mark Confirmed';
+        confirmBtn.addEventListener('click', () => confirmEntry(entry.id));
+        actions.appendChild(confirmBtn);
+      }
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'px-3 py-1.5 text-sm rounded-lg text-red-500 hover:bg-red-500/10 transition-colors';
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', () => deleteEntry(entry.id));
+      actions.appendChild(deleteBtn);
+
+      wrapper.appendChild(info);
+      wrapper.appendChild(actions);
+      card.appendChild(wrapper);
+
+      return card;
+    }
+
+    function renderEntries(filter: string = 'all'): void {
+      let entries = updateEntryStatuses(getEntries());
+      saveEntries(entries);
+
+      if (filter !== 'all') {
+        entries = entries.filter(e => e.status === filter);
+      }
+
+      const listEl = document.getElementById('entries-list');
+      const emptyEl = document.getElementById('empty-state');
+
+      if (!listEl || !emptyEl) return;
+
+      // Clear existing entries
+      while (listEl.firstChild) {
+        listEl.removeChild(listEl.firstChild);
+      }
+
+      if (entries.length === 0) {
+        listEl.classList.add('hidden');
+        emptyEl.classList.remove('hidden');
+        updateStats(getEntries());
+        return;
+      }
+
+      listEl.classList.remove('hidden');
+      emptyEl.classList.add('hidden');
+
+      // Sort by date (newest first)
+      entries.sort((a, b) => new Date(b.dateSubmitted).getTime() - new Date(a.dateSubmitted).getTime());
+
+      // Create and append entry elements
+      entries.forEach(entry => {
+        listEl.appendChild(createEntryElement(entry));
+      });
+
+      updateStats(getEntries());
+    }
+
+    function confirmEntry(id: string): void {
+      const entries = getEntries();
+      const index = entries.findIndex(e => e.id === id);
+      if (index !== -1) {
+        entries[index].status = 'confirmed';
+        saveEntries(entries);
+        const filterEl = document.getElementById('filter-status') as HTMLSelectElement;
+        renderEntries(filterEl?.value || 'all');
+      }
+    }
+
+    function deleteEntry(id: string): void {
+      if (!confirm('Are you sure you want to delete this entry?')) return;
+      const entries = getEntries().filter(e => e.id !== id);
+      saveEntries(entries);
+      const filterEl = document.getElementById('filter-status') as HTMLSelectElement;
+      renderEntries(filterEl?.value || 'all');
+    }
+
+    function addEntry(): void {
+      const selectEl = document.getElementById('broker-select') as HTMLSelectElement;
+      const customEl = document.getElementById('custom-broker') as HTMLInputElement;
+      const dateEl = document.getElementById('submit-date') as HTMLInputElement;
+      const confirmEl = document.getElementById('confirmation-number') as HTMLInputElement;
+      const notesEl = document.getElementById('notes') as HTMLTextAreaElement;
+
+      let broker = selectEl.value;
+      let category = 'Custom';
+      let url = '';
+
+      if (broker === '__custom__') {
+        broker = customEl.value.trim();
+        if (!broker) {
+          alert('Please enter a broker name');
+          return;
+        }
+      } else if (broker) {
+        const option = selectEl.selectedOptions[0];
+        category = option.dataset.category || 'Other';
+        url = option.dataset.url || '';
+      } else {
+        alert('Please select or enter a broker');
+        return;
+      }
+
+      if (!dateEl.value) {
+        alert('Please enter the submission date');
+        return;
+      }
+
+      const entry: OptOutEntry = {
+        id: generateId(),
+        broker,
+        category,
+        url,
+        dateSubmitted: dateEl.value,
+        confirmationNumber: confirmEl.value.trim(),
+        notes: notesEl.value.trim(),
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      };
+
+      const entries = getEntries();
+      entries.push(entry);
+      saveEntries(entries);
+
+      // Reset form
+      selectEl.value = '';
+      customEl.value = '';
+      customEl.classList.add('hidden');
+      dateEl.value = new Date().toISOString().split('T')[0];
+      confirmEl.value = '';
+      notesEl.value = '';
+
+      renderEntries();
+    }
+
+    function exportToCsv(): void {
+      const entries = getEntries();
+      if (entries.length === 0) {
+        alert('No entries to export');
+        return;
+      }
+
+      const headers = ['Broker', 'Category', 'Date Submitted', 'Status', 'Confirmation Number', 'Notes', 'URL'];
+      const rows = entries.map(e => [
+        e.broker,
+        e.category,
+        e.dateSubmitted,
+        e.status,
+        e.confirmationNumber,
+        e.notes,
+        e.url
+      ]);
+
+      const csvContent = [
+        headers.join(','),
+        ...rows.map(row => row.map(cell => `"${(cell || '').replace(/"/g, '""')}"`).join(','))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `privacyfix-optouts-${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set default date to today
+      const dateEl = document.getElementById('submit-date') as HTMLInputElement;
+      if (dateEl) {
+        dateEl.value = new Date().toISOString().split('T')[0];
+      }
+
+      // Handle custom broker selection
+      const selectEl = document.getElementById('broker-select') as HTMLSelectElement;
+      const customEl = document.getElementById('custom-broker') as HTMLInputElement;
+
+      selectEl?.addEventListener('change', () => {
+        if (selectEl.value === '__custom__') {
+          customEl?.classList.remove('hidden');
+          customEl?.focus();
+        } else {
+          customEl?.classList.add('hidden');
+        }
+      });
+
+      // Add entry button
+      document.getElementById('add-entry')?.addEventListener('click', addEntry);
+
+      // Filter change
+      document.getElementById('filter-status')?.addEventListener('change', (e) => {
+        renderEntries((e.target as HTMLSelectElement).value);
+      });
+
+      // Export button
+      document.getElementById('export-data')?.addEventListener('click', exportToCsv);
+
+      // Initial render
+      renderEntries();
+    });
+  </script>
+</Base>
