@@ -1,0 +1,498 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// State privacy law data - comprehensive as of 2026
+const stateData = [
+  {
+    state: "California",
+    abbr: "CA",
+    law: "CCPA/CPRA",
+    effective: "2020/2023",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "limit-sensitive", "non-discrimination"],
+    enforcement: "CA Privacy Protection Agency + AG",
+    private_action: true,
+    drop_portal: true,
+    notes: "Most comprehensive. DROP portal launches Aug 2026 for one-click broker opt-outs."
+  },
+  {
+    state: "Virginia",
+    abbr: "VA",
+    law: "VCDPA",
+    effective: "2023",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Strong law but AG enforcement only. 45-day response requirement."
+  },
+  {
+    state: "Colorado",
+    abbr: "CO",
+    law: "CPA",
+    effective: "2023",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling", "universal-opt-out"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Requires businesses to honor universal opt-out signals (like GPC)."
+  },
+  {
+    state: "Connecticut",
+    abbr: "CT",
+    law: "CTDPA",
+    effective: "2023",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling", "universal-opt-out"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Similar to Colorado. Universal opt-out signal recognition required."
+  },
+  {
+    state: "Utah",
+    abbr: "UT",
+    law: "UCPA",
+    effective: "2023",
+    rights: ["access", "delete", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "More business-friendly. No right to correct data."
+  },
+  {
+    state: "Iowa",
+    abbr: "IA",
+    law: "ICDPA",
+    effective: "2025",
+    rights: ["access", "delete", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Similar to Utah. 90-day cure period for businesses."
+  },
+  {
+    state: "Indiana",
+    abbr: "IN",
+    law: "ICDPA",
+    effective: "2026",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "30-day cure period. Effective January 2026."
+  },
+  {
+    state: "Tennessee",
+    abbr: "TN",
+    law: "TIPA",
+    effective: "2025",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "60-day cure period for businesses."
+  },
+  {
+    state: "Montana",
+    abbr: "MT",
+    law: "MCDPA",
+    effective: "2024",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling", "universal-opt-out"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Universal opt-out signal recognition required."
+  },
+  {
+    state: "Texas",
+    abbr: "TX",
+    law: "TDPSA",
+    effective: "2024",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "30-day cure period. Applies to businesses with TX data."
+  },
+  {
+    state: "Oregon",
+    abbr: "OR",
+    law: "OCPA",
+    effective: "2024",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling", "universal-opt-out"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Universal opt-out signal recognition required by 2026."
+  },
+  {
+    state: "Delaware",
+    abbr: "DE",
+    law: "DPDPA",
+    effective: "2025",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling", "universal-opt-out"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Universal opt-out recognition. No cure period."
+  },
+  {
+    state: "New Jersey",
+    abbr: "NJ",
+    law: "NJDPA",
+    effective: "2025",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling", "universal-opt-out"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Universal opt-out recognition required."
+  },
+  {
+    state: "New Hampshire",
+    abbr: "NH",
+    law: "NHDPA",
+    effective: "2025",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "60-day cure period for businesses."
+  },
+  {
+    state: "Kentucky",
+    abbr: "KY",
+    law: "KCDPA",
+    effective: "2026",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "30-day cure period. Effective January 2026."
+  },
+  {
+    state: "Nebraska",
+    abbr: "NE",
+    law: "NDPA",
+    effective: "2025",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "30-day cure period."
+  },
+  {
+    state: "Maryland",
+    abbr: "MD",
+    law: "MODPA",
+    effective: "2025",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling", "limit-sensitive"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Stricter on sensitive data. No sale of sensitive data without consent."
+  },
+  {
+    state: "Minnesota",
+    abbr: "MN",
+    law: "MCDPA",
+    effective: "2025",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Standard comprehensive privacy law."
+  },
+  {
+    state: "Rhode Island",
+    abbr: "RI",
+    law: "RIDPA",
+    effective: "2026",
+    rights: ["access", "delete", "correct", "portability", "opt-out-sale", "opt-out-profiling"],
+    enforcement: "AG only",
+    private_action: false,
+    drop_portal: false,
+    notes: "Effective January 2026."
+  }
+];
+
+const rightsExplanations: Record<string, { label: string; description: string }> = {
+  "access": { label: "Access", description: "Request a copy of personal data a company has about you" },
+  "delete": { label: "Delete", description: "Request deletion of your personal data" },
+  "correct": { label: "Correct", description: "Request corrections to inaccurate personal data" },
+  "portability": { label: "Portability", description: "Receive your data in a portable, machine-readable format" },
+  "opt-out-sale": { label: "Opt-Out of Sale", description: "Prevent companies from selling your personal data" },
+  "opt-out-profiling": { label: "Opt-Out of Profiling", description: "Opt out of automated decision-making and profiling" },
+  "limit-sensitive": { label: "Limit Sensitive Data", description: "Restrict use of sensitive data (health, race, religion, etc.)" },
+  "universal-opt-out": { label: "Universal Opt-Out", description: "Companies must honor browser signals like Global Privacy Control (GPC)" },
+  "non-discrimination": { label: "Non-Discrimination", description: "Companies cannot penalize you for exercising privacy rights" }
+};
+---
+
+<Base
+  title="State Privacy Rights Lookup"
+  description="Find out exactly what privacy rights you have based on your state. 19 states now have comprehensive privacy laws. Know your rights."
+>
+  <section class="py-12 md:py-16">
+    <div class="container">
+      <div class="max-w-4xl mx-auto">
+        <header class="mb-8">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/tools" class="hover:text-emerald-500">Tools</a>
+            <span>/</span>
+            <span>State Rights Lookup</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">State Privacy Rights Lookup</h1>
+          <p class="text-xl text-[var(--color-muted)]">
+            Find out what privacy protections you have based on where you live.
+          </p>
+        </header>
+
+        <!-- State Selector -->
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] mb-8">
+          <label class="block text-lg font-semibold mb-4">Select Your State</label>
+          <select id="state-select" class="w-full px-4 py-3 text-lg rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="">Choose a state...</option>
+            {stateData.map(s => (
+              <option value={s.abbr}>{s.state}</option>
+            ))}
+            <option value="__other__">Other (not listed)</option>
+          </select>
+        </div>
+
+        <!-- Results Area -->
+        <div id="results" class="hidden">
+          <!-- State with law -->
+          <div id="result-has-law" class="hidden">
+            <div class="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-6">
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <p class="font-semibold text-emerald-700 dark:text-emerald-300">
+                    <span id="result-state-name">Your state</span> has a comprehensive privacy law!
+                  </p>
+                  <p class="text-sm text-[var(--color-muted)] mt-1" id="result-law-name"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rights Grid -->
+            <div class="mb-8">
+              <h2 class="text-xl font-semibold mb-4">Your Rights</h2>
+              <div id="rights-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <!-- Rights will be inserted here -->
+              </div>
+            </div>
+
+            <!-- Enforcement Info -->
+            <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] mb-8">
+              <h2 class="text-xl font-semibold mb-4">How to Exercise Your Rights</h2>
+              <div class="space-y-4">
+                <div>
+                  <h3 class="font-medium mb-1">Enforcement</h3>
+                  <p class="text-sm text-[var(--color-muted)]" id="result-enforcement"></p>
+                </div>
+                <div id="private-action-section">
+                  <h3 class="font-medium mb-1">Private Right of Action</h3>
+                  <p class="text-sm text-[var(--color-muted)]" id="result-private-action"></p>
+                </div>
+                <div>
+                  <h3 class="font-medium mb-1">Notes</h3>
+                  <p class="text-sm text-[var(--color-muted)]" id="result-notes"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- DROP Portal Notice (CA only) -->
+            <div id="drop-notice" class="hidden p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8">
+              <h3 class="font-semibold text-emerald-700 dark:text-emerald-300 mb-2">California DROP Portal</h3>
+              <p class="text-sm text-[var(--color-muted)] mb-3">
+                Starting August 2026, you can use California's DROP portal to request deletion from ALL registered data brokers with a single request.
+              </p>
+              <a href="/guides/california-drop" class="text-emerald-500 hover:text-emerald-600 text-sm font-medium">
+                Learn more about DROP →
+              </a>
+            </div>
+          </div>
+
+          <!-- No state law -->
+          <div id="result-no-law" class="hidden">
+            <div class="p-6 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-6">
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <div>
+                  <p class="font-semibold text-amber-700 dark:text-amber-300">
+                    Your state doesn't have a comprehensive privacy law yet.
+                  </p>
+                  <p class="text-sm text-[var(--color-muted)] mt-1">
+                    But you still have options to protect your privacy.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] mb-8">
+              <h2 class="text-xl font-semibold mb-4">What You Can Still Do</h2>
+              <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                    <span class="font-bold text-sm">1</span>
+                  </div>
+                  <div>
+                    <h3 class="font-medium">Use company opt-outs</h3>
+                    <p class="text-sm text-[var(--color-muted)]">Most data brokers offer opt-out processes regardless of your state. See our <a href="/guides/data-brokers" class="text-emerald-500 hover:underline">opt-out guide</a>.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                    <span class="font-bold text-sm">2</span>
+                  </div>
+                  <div>
+                    <h3 class="font-medium">Enable Global Privacy Control</h3>
+                    <p class="text-sm text-[var(--color-muted)]">Many companies honor GPC signals even without a legal requirement. Enable it in your browser settings.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                    <span class="font-bold text-sm">3</span>
+                  </div>
+                  <div>
+                    <h3 class="font-medium">Use a California address</h3>
+                    <p class="text-sm text-[var(--color-muted)]">If you have any California connection (work, property, family), some CCPA rights may apply to you.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Initial State (before selection) -->
+        <div id="initial-state" class="p-12 rounded-xl border border-dashed border-[var(--color-border)] text-center">
+          <svg class="w-16 h-16 mx-auto text-[var(--color-muted)] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+          </svg>
+          <p class="text-lg text-[var(--color-muted)] mb-2">Select your state above</p>
+          <p class="text-sm text-[var(--color-muted)]">We'll show you what privacy rights you have and how to exercise them.</p>
+        </div>
+
+        <!-- Stats Footer -->
+        <div class="mt-12 p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+              <div class="text-2xl font-bold text-emerald-500">19</div>
+              <div class="text-sm text-[var(--color-muted)]">States with Laws</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-emerald-500">6</div>
+              <div class="text-sm text-[var(--color-muted)]">Universal Opt-Out</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-emerald-500">1</div>
+              <div class="text-sm text-[var(--color-muted)]">Private Action</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-emerald-500">1</div>
+              <div class="text-sm text-[var(--color-muted)]">DROP Portal</div>
+            </div>
+          </div>
+          <p class="text-center text-sm text-[var(--color-muted)] mt-4">
+            Data current as of February 2026. Laws and effective dates may change.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ stateData, rightsExplanations }}>
+    const selectEl = document.getElementById('state-select');
+    const resultsEl = document.getElementById('results');
+    const initialEl = document.getElementById('initial-state');
+    const hasLawEl = document.getElementById('result-has-law');
+    const noLawEl = document.getElementById('result-no-law');
+
+    function showState(abbr) {
+      if (!abbr) {
+        resultsEl.classList.add('hidden');
+        initialEl.classList.remove('hidden');
+        return;
+      }
+
+      initialEl.classList.add('hidden');
+      resultsEl.classList.remove('hidden');
+
+      const state = stateData.find(s => s.abbr === abbr);
+
+      if (!state) {
+        // No law state
+        hasLawEl.classList.add('hidden');
+        noLawEl.classList.remove('hidden');
+        return;
+      }
+
+      // Has law
+      noLawEl.classList.add('hidden');
+      hasLawEl.classList.remove('hidden');
+
+      // Update state name
+      document.getElementById('result-state-name').textContent = state.state;
+      document.getElementById('result-law-name').textContent = `${state.law} • Effective ${state.effective}`;
+
+      // Build rights grid using DOM methods
+      const rightsGrid = document.getElementById('rights-grid');
+      while (rightsGrid.firstChild) {
+        rightsGrid.removeChild(rightsGrid.firstChild);
+      }
+
+      Object.keys(rightsExplanations).forEach(rightKey => {
+        const right = rightsExplanations[rightKey];
+        const hasRight = state.rights.includes(rightKey);
+
+        const card = document.createElement('div');
+        card.className = `p-3 rounded-lg border ${hasRight ? 'border-emerald-500/30 bg-emerald-500/5' : 'border-[var(--color-border)] bg-[var(--color-card)] opacity-50'}`;
+
+        const header = document.createElement('div');
+        header.className = 'flex items-center gap-2 mb-1';
+
+        const icon = document.createElement('span');
+        icon.className = hasRight ? 'text-emerald-500' : 'text-[var(--color-muted)]';
+        icon.textContent = hasRight ? '✓' : '×';
+
+        const label = document.createElement('span');
+        label.className = 'font-medium text-sm';
+        label.textContent = right.label;
+
+        header.appendChild(icon);
+        header.appendChild(label);
+
+        const desc = document.createElement('p');
+        desc.className = 'text-xs text-[var(--color-muted)]';
+        desc.textContent = right.description;
+
+        card.appendChild(header);
+        card.appendChild(desc);
+        rightsGrid.appendChild(card);
+      });
+
+      // Enforcement info
+      document.getElementById('result-enforcement').textContent = state.enforcement;
+      document.getElementById('result-private-action').textContent = state.private_action
+        ? 'Yes - you can sue companies directly for violations.'
+        : 'No - only the state Attorney General can bring enforcement actions.';
+      document.getElementById('result-notes').textContent = state.notes;
+
+      // DROP portal notice (CA only)
+      const dropNotice = document.getElementById('drop-notice');
+      if (state.drop_portal) {
+        dropNotice.classList.remove('hidden');
+      } else {
+        dropNotice.classList.add('hidden');
+      }
+    }
+
+    selectEl.addEventListener('change', (e) => {
+      showState(e.target.value === '__other__' ? null : e.target.value);
+    });
+  </script>
+</Base>
