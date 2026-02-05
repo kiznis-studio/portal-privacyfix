@@ -7,7 +7,7 @@ const guides = [
     description: "Complete guide to using California's upcoming DROP portal for one-click data broker removal. Free, government-backed, covering 500+ brokers.",
     href: "/guides/california-drop",
     tag: "Featured",
-    tagColor: "emerald"
+    tagColor: "violet"
   },
   {
     title: "Data Broker Opt-Out Guide",
@@ -60,14 +60,14 @@ const comingSoon = [
           {guides.map((guide) => (
             <a
               href={guide.href}
-              class="block p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] hover:border-emerald-500/50 transition-colors"
+              class="block p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] hover:border-violet-500/50 transition-colors"
             >
               <div class="flex items-start justify-between gap-4">
                 <div>
                   <div class="flex items-center gap-3 mb-2">
                     <h2 class="text-xl font-semibold">{guide.title}</h2>
                     <span class={`text-xs px-2 py-0.5 rounded-full ${
-                      guide.tagColor === 'emerald' ? 'bg-emerald-500/10 text-emerald-500' :
+                      guide.tagColor === 'violet' ? 'bg-violet-500/10 text-violet-500' :
                       guide.tagColor === 'blue' ? 'bg-blue-500/10 text-blue-500' :
                       'bg-amber-500/10 text-amber-500'
                     }`}>
@@ -98,7 +98,7 @@ const comingSoon = [
         </div>
 
         <!-- CTA -->
-        <div class="mt-16 p-8 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 text-center">
+        <div class="mt-16 p-8 rounded-2xl bg-gradient-to-br from-violet-500/10 to-violet-500/5 border border-violet-500/20 text-center">
           <h2 class="text-2xl font-bold mb-3">Not Sure Where to Start?</h2>
           <p class="text-[var(--color-muted)] mb-6 max-w-xl mx-auto">
             Take our 2-minute Privacy Audit. Answer a few questions and get a personalized
@@ -106,7 +106,7 @@ const comingSoon = [
           </p>
           <a
             href="/tools/privacy-audit"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-lg transition-colors"
           >
             Start Privacy Audit
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -236,7 +236,7 @@ const rightsExplanations: Record<string, { label: string; description: string }>
       <div class="max-w-4xl mx-auto">
         <header class="mb-8">
           <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
-            <a href="/tools" class="hover:text-emerald-500">Tools</a>
+            <a href="/tools" class="hover:text-violet-500">Tools</a>
             <span>/</span>
             <span>State Rights Lookup</span>
           </div>
@@ -249,7 +249,7 @@ const rightsExplanations: Record<string, { label: string; description: string }>
         <!-- State Selector -->
         <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] mb-8">
           <label class="block text-lg font-semibold mb-4">Select Your State</label>
-          <select id="state-select" class="w-full px-4 py-3 text-lg rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          <select id="state-select" class="w-full px-4 py-3 text-lg rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-violet-500">
             <option value="">Choose a state...</option>
             {stateData.map(s => (
               <option value={s.abbr}>{s.state}</option>
@@ -262,13 +262,13 @@ const rightsExplanations: Record<string, { label: string; description: string }>
         <div id="results" class="hidden">
           <!-- State with law -->
           <div id="result-has-law" class="hidden">
-            <div class="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-6">
+            <div class="p-6 rounded-xl bg-violet-500/10 border border-violet-500/20 mb-6">
               <div class="flex items-start gap-3">
-                <svg class="w-6 h-6 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-6 h-6 text-violet-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
-                  <p class="font-semibold text-emerald-700 dark:text-emerald-300">
+                  <p class="font-semibold text-violet-700 dark:text-violet-300">
                     <span id="result-state-name">Your state</span> has a comprehensive privacy law!
                   </p>
                   <p class="text-sm text-[var(--color-muted)] mt-1" id="result-law-name"></p>
@@ -304,12 +304,12 @@ const rightsExplanations: Record<string, { label: string; description: string }>
             </div>
 
             <!-- DROP Portal Notice (CA only) -->
-            <div id="drop-notice" class="hidden p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8">
-              <h3 class="font-semibold text-emerald-700 dark:text-emerald-300 mb-2">California DROP Portal</h3>
+            <div id="drop-notice" class="hidden p-6 rounded-xl bg-violet-500/10 border border-violet-500/20 mb-8">
+              <h3 class="font-semibold text-violet-700 dark:text-violet-300 mb-2">California DROP Portal</h3>
               <p class="text-sm text-[var(--color-muted)] mb-3">
                 Starting August 2026, you can use California's DROP portal to request deletion from ALL registered data brokers with a single request.
               </p>
-              <a href="/guides/california-drop" class="text-emerald-500 hover:text-emerald-600 text-sm font-medium">
+              <a href="/guides/california-drop" class="text-violet-500 hover:text-violet-600 text-sm font-medium">
                 Learn more about DROP →
               </a>
             </div>
@@ -337,16 +337,16 @@ const rightsExplanations: Record<string, { label: string; description: string }>
               <h2 class="text-xl font-semibold mb-4">What You Can Still Do</h2>
               <div class="space-y-4">
                 <div class="flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                  <div class="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-500 flex-shrink-0">
                     <span class="font-bold text-sm">1</span>
                   </div>
                   <div>
                     <h3 class="font-medium">Use company opt-outs</h3>
-                    <p class="text-sm text-[var(--color-muted)]">Most data brokers offer opt-out processes regardless of your state. See our <a href="/guides/data-brokers" class="text-emerald-500 hover:underline">opt-out guide</a>.</p>
+                    <p class="text-sm text-[var(--color-muted)]">Most data brokers offer opt-out processes regardless of your state. See our <a href="/guides/data-brokers" class="text-violet-500 hover:underline">opt-out guide</a>.</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                  <div class="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-500 flex-shrink-0">
                     <span class="font-bold text-sm">2</span>
                   </div>
                   <div>
@@ -355,7 +355,7 @@ const rightsExplanations: Record<string, { label: string; description: string }>
                   </div>
                 </div>
                 <div class="flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 flex-shrink-0">
+                  <div class="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-500 flex-shrink-0">
                     <span class="font-bold text-sm">3</span>
                   </div>
                   <div>
@@ -381,19 +381,19 @@ const rightsExplanations: Record<string, { label: string; description: string }>
         <div class="mt-12 p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]">
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
-              <div class="text-2xl font-bold text-emerald-500">19</div>
+              <div class="text-2xl font-bold text-violet-500">19</div>
               <div class="text-sm text-[var(--color-muted)]">States with Laws</div>
             </div>
             <div>
-              <div class="text-2xl font-bold text-emerald-500">6</div>
+              <div class="text-2xl font-bold text-violet-500">6</div>
               <div class="text-sm text-[var(--color-muted)]">Universal Opt-Out</div>
             </div>
             <div>
-              <div class="text-2xl font-bold text-emerald-500">1</div>
+              <div class="text-2xl font-bold text-violet-500">1</div>
               <div class="text-sm text-[var(--color-muted)]">Private Action</div>
             </div>
             <div>
-              <div class="text-2xl font-bold text-emerald-500">1</div>
+              <div class="text-2xl font-bold text-violet-500">1</div>
               <div class="text-sm text-[var(--color-muted)]">DROP Portal</div>
             </div>
           </div>
@@ -450,13 +450,13 @@ const rightsExplanations: Record<string, { label: string; description: string }>
         const hasRight = state.rights.includes(rightKey);
 
         const card = document.createElement('div');
-        card.className = `p-3 rounded-lg border ${hasRight ? 'border-emerald-500/30 bg-emerald-500/5' : 'border-[var(--color-border)] bg-[var(--color-card)] opacity-50'}`;
+        card.className = `p-3 rounded-lg border ${hasRight ? 'border-violet-500/30 bg-violet-500/5' : 'border-[var(--color-border)] bg-[var(--color-card)] opacity-50'}`;
 
         const header = document.createElement('div');
         header.className = 'flex items-center gap-2 mb-1';
 
         const icon = document.createElement('span');
-        icon.className = hasRight ? 'text-emerald-500' : 'text-[var(--color-muted)]';
+        icon.className = hasRight ? 'text-violet-500' : 'text-[var(--color-muted)]';
         icon.textContent = hasRight ? '✓' : '×';
 
         const label = document.createElement('span');

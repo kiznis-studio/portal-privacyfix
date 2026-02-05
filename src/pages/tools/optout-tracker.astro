@@ -26,7 +26,7 @@ const popularBrokers = [
       <div class="max-w-4xl mx-auto">
         <header class="mb-8">
           <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
-            <a href="/tools" class="hover:text-emerald-500">Tools</a>
+            <a href="/tools" class="hover:text-violet-500">Tools</a>
             <span>/</span>
             <span>Opt-Out Tracker</span>
           </div>
@@ -36,13 +36,13 @@ const popularBrokers = [
           </p>
         </header>
 
-        <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8">
+        <div class="p-4 rounded-xl bg-violet-500/10 border border-violet-500/20 mb-8">
           <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-5 h-5 text-violet-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
             <div>
-              <p class="font-medium text-emerald-700 dark:text-emerald-300">Your data stays on your device</p>
+              <p class="font-medium text-violet-700 dark:text-violet-300">Your data stays on your device</p>
               <p class="text-sm text-[var(--color-muted)]">All tracking data is stored in your browser's localStorage. We never see or store your opt-out history.</p>
             </div>
           </div>
@@ -51,7 +51,7 @@ const popularBrokers = [
         <!-- Stats Summary -->
         <div id="stats-summary" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] text-center">
-            <div id="stat-total" class="text-2xl font-bold text-emerald-500">0</div>
+            <div id="stat-total" class="text-2xl font-bold text-violet-500">0</div>
             <div class="text-sm text-[var(--color-muted)]">Total Tracked</div>
           </div>
           <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] text-center">
@@ -59,7 +59,7 @@ const popularBrokers = [
             <div class="text-sm text-[var(--color-muted)]">Pending</div>
           </div>
           <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] text-center">
-            <div id="stat-confirmed" class="text-2xl font-bold text-emerald-500">0</div>
+            <div id="stat-confirmed" class="text-2xl font-bold text-violet-500">0</div>
             <div class="text-sm text-[var(--color-muted)]">Confirmed</div>
           </div>
           <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] text-center">
@@ -75,7 +75,7 @@ const popularBrokers = [
             <div>
               <label class="block text-sm font-medium mb-2">Data Broker</label>
               <div class="relative">
-                <select id="broker-select" class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <select id="broker-select" class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-violet-500">
                   <option value="">Select a broker or enter custom...</option>
                   {popularBrokers.map(broker => (
                     <option value={broker.name} data-url={broker.url} data-category={broker.category}>
@@ -89,7 +89,7 @@ const popularBrokers = [
                 type="text"
                 id="custom-broker"
                 placeholder="Enter broker name"
-                class="hidden w-full mt-2 px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                class="hidden w-full mt-2 px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
             </div>
             <div>
@@ -97,7 +97,7 @@ const popularBrokers = [
               <input
                 type="date"
                 id="submit-date"
-                class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
             </div>
           </div>
@@ -107,7 +107,7 @@ const popularBrokers = [
               type="text"
               id="confirmation-number"
               placeholder="e.g., OPT-12345"
-              class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
           <div class="mt-4">
@@ -116,12 +116,12 @@ const popularBrokers = [
               id="notes"
               rows="2"
               placeholder="Any notes about the request..."
-              class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+              class="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
             ></textarea>
           </div>
           <button
             id="add-entry"
-            class="mt-4 w-full md:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
+            class="mt-4 w-full md:w-auto px-6 py-3 bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-lg transition-colors"
           >
             Add to Tracker
           </button>
@@ -162,21 +162,21 @@ const popularBrokers = [
           <h2 class="text-lg font-semibold mb-4">How It Works</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-3">
+              <div class="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-500 mb-3">
                 <span class="font-bold">1</span>
               </div>
               <h3 class="font-medium mb-1">Track Requests</h3>
               <p class="text-sm text-[var(--color-muted)]">Add each opt-out request as you submit it. Include the date and any confirmation numbers.</p>
             </div>
             <div>
-              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-3">
+              <div class="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-500 mb-3">
                 <span class="font-bold">2</span>
               </div>
               <h3 class="font-medium mb-1">Monitor Status</h3>
               <p class="text-sm text-[var(--color-muted)]">After 45 days, requests automatically move to "Need Follow-up" to remind you to verify removal.</p>
             </div>
             <div>
-              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-3">
+              <div class="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-500 mb-3">
                 <span class="font-bold">3</span>
               </div>
               <h3 class="font-medium mb-1">Confirm Removal</h3>
@@ -266,7 +266,7 @@ const popularBrokers = [
       badge.className = 'px-2 py-1 text-xs rounded-full';
 
       if (status === 'confirmed') {
-        badge.className += ' bg-emerald-500/10 text-emerald-500';
+        badge.className += ' bg-violet-500/10 text-violet-500';
         badge.textContent = 'Confirmed';
       } else if (status === 'followup' || daysRemaining <= 0) {
         badge.className += ' bg-red-500/10 text-red-500';
@@ -337,7 +337,7 @@ const popularBrokers = [
 
       if (entry.status !== 'confirmed') {
         const confirmBtn = document.createElement('button');
-        confirmBtn.className = 'px-3 py-1.5 text-sm rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white transition-colors';
+        confirmBtn.className = 'px-3 py-1.5 text-sm rounded-lg bg-violet-500 hover:bg-violet-600 text-white transition-colors';
         confirmBtn.textContent = 'Mark Confirmed';
         confirmBtn.addEventListener('click', () => confirmEntry(entry.id));
         actions.appendChild(confirmBtn);

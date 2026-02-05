@@ -11,7 +11,7 @@ import Base from '../../layouts/Base.astro';
       <div class="max-w-3xl mx-auto">
         <!-- Header -->
         <header class="text-center mb-12">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-medium mb-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 text-sm font-medium mb-4">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
             </svg>
@@ -32,7 +32,7 @@ import Base from '../../layouts/Base.astro';
               <span id="progress-text" class="font-medium">Question 1 of 8</span>
             </div>
             <div class="h-2 bg-[var(--color-border)] rounded-full overflow-hidden">
-              <div id="progress-bar" class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: 12.5%"></div>
+              <div id="progress-bar" class="h-full bg-violet-500 rounded-full transition-all duration-300" style="width: 12.5%"></div>
             </div>
           </div>
 
@@ -184,9 +184,9 @@ import Base from '../../layouts/Base.astro';
 
       q.options.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'w-full p-4 text-left rounded-xl border border-[var(--color-border)] hover:border-emerald-500 hover:bg-emerald-500/5 transition-all';
+        btn.className = 'w-full p-4 text-left rounded-xl border border-[var(--color-border)] hover:border-violet-500 hover:bg-violet-500/5 transition-all';
         if (answers[q.id] === opt.value) {
-          btn.classList.add('border-emerald-500', 'bg-emerald-500/10');
+          btn.classList.add('border-violet-500', 'bg-violet-500/10');
         }
         btn.dataset.value = opt.value;
         btn.dataset.risk = opt.risk;
@@ -246,7 +246,7 @@ import Base from '../../layouts/Base.astro';
       }
 
       // Brief delay for visual feedback
-      btn.classList.add('border-emerald-500', 'bg-emerald-500/10');
+      btn.classList.add('border-violet-500', 'bg-violet-500/10');
 
       setTimeout(function() {
         if (currentQuestion < questions.length - 1) {
@@ -283,7 +283,7 @@ import Base from '../../layouts/Base.astro';
       let riskLevel, riskColor, riskDescription;
       if (riskPercentage < 25) {
         riskLevel = 'Low';
-        riskColor = 'emerald';
+        riskColor = 'violet';
         riskDescription = 'You are already taking good steps to protect your privacy. Focus on maintaining your practices and filling any gaps.';
       } else if (riskPercentage < 50) {
         riskLevel = 'Moderate';
@@ -346,7 +346,7 @@ import Base from '../../layouts/Base.astro';
         innerDiv.className = 'flex items-start gap-4';
 
         const numDiv = document.createElement('div');
-        numDiv.className = 'w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold flex-shrink-0';
+        numDiv.className = 'w-8 h-8 rounded-full bg-violet-500/10 text-violet-500 flex items-center justify-center font-bold flex-shrink-0';
         numDiv.textContent = (i + 1).toString();
         innerDiv.appendChild(numDiv);
 
@@ -366,7 +366,7 @@ import Base from '../../layouts/Base.astro';
         if (item.link) {
           const link = document.createElement('a');
           link.href = item.link;
-          link.className = 'text-sm text-emerald-500 hover:text-emerald-600 font-medium';
+          link.className = 'text-sm text-violet-500 hover:text-violet-600 font-medium';
           link.textContent = item.linkText + ' →';
           contentDiv.appendChild(link);
         }
@@ -380,7 +380,7 @@ import Base from '../../layouts/Base.astro';
         } else if (item.priority === 'medium') {
           prioritySpan.className += 'bg-amber-500/10 text-amber-600 dark:text-amber-400';
         } else {
-          prioritySpan.className += 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400';
+          prioritySpan.className += 'bg-violet-500/10 text-violet-600 dark:text-violet-400';
         }
         prioritySpan.textContent = item.priority;
         innerDiv.appendChild(prioritySpan);
@@ -394,7 +394,7 @@ import Base from '../../layouts/Base.astro';
 
       // CTA box
       const ctaDiv = document.createElement('div');
-      ctaDiv.className = 'p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8';
+      ctaDiv.className = 'p-6 rounded-xl bg-violet-500/10 border border-violet-500/20 mb-8';
 
       const ctaTitle = document.createElement('h3');
       ctaTitle.className = 'font-semibold text-lg mb-2';
@@ -408,7 +408,7 @@ import Base from '../../layouts/Base.astro';
 
       const ctaLink = document.createElement('a');
       ctaLink.href = '/tools/optout-tracker';
-      ctaLink.className = 'inline-flex items-center gap-2 text-emerald-500 hover:text-emerald-600 font-medium';
+      ctaLink.className = 'inline-flex items-center gap-2 text-violet-500 hover:text-violet-600 font-medium';
       ctaLink.innerHTML = 'Try the Opt-Out Tracker <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>';
       ctaDiv.appendChild(ctaLink);
 

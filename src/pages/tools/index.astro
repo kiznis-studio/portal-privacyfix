@@ -10,7 +10,7 @@ const tools = [
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
     </svg>`,
     tag: "Available",
-    tagColor: "emerald"
+    tagColor: "violet"
   },
   {
     title: "Opt-Out Tracker",
@@ -20,7 +20,7 @@ const tools = [
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
     </svg>`,
     tag: "Available",
-    tagColor: "emerald"
+    tagColor: "violet"
   },
   {
     title: "State Rights Lookup",
@@ -30,7 +30,7 @@ const tools = [
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
     </svg>`,
     tag: "Available",
-    tagColor: "emerald"
+    tagColor: "violet"
   },
   {
     title: "Breach Check",
@@ -40,7 +40,7 @@ const tools = [
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
     </svg>`,
     tag: "Available",
-    tagColor: "emerald"
+    tagColor: "violet"
   }
 ];
 
@@ -61,13 +61,13 @@ const comingSoon: typeof tools = [];
           </p>
         </header>
 
-        <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8">
+        <div class="p-4 rounded-xl bg-violet-500/10 border border-violet-500/20 mb-8">
           <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-5 h-5 text-violet-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
             <div>
-              <p class="font-medium text-emerald-700 dark:text-emerald-300">Your data never leaves your device</p>
+              <p class="font-medium text-violet-700 dark:text-violet-300">Your data never leaves your device</p>
               <p class="text-sm text-[var(--color-muted)]">All calculations happen locally in your browser. We can't see your answers or results.</p>
             </div>
           </div>
@@ -78,14 +78,14 @@ const comingSoon: typeof tools = [];
           {tools.map((tool) => (
             <a
               href={tool.href}
-              class="block p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] hover:border-emerald-500/50 transition-colors"
+              class="block p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] hover:border-violet-500/50 transition-colors"
             >
               <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500" set:html={tool.icon} />
+                <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-500" set:html={tool.icon} />
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
                     <h2 class="text-xl font-semibold">{tool.title}</h2>
-                    <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500">
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-500">
                       {tool.tag}
                     </span>
                   </div>
@@ -114,7 +114,7 @@ const comingSoon: typeof tools = [];
         </div>
 
         <!-- CTA -->
-        <div class="mt-16 p-8 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 text-center">
+        <div class="mt-16 p-8 rounded-2xl bg-gradient-to-br from-violet-500/10 to-violet-500/5 border border-violet-500/20 text-center">
           <h2 class="text-2xl font-bold mb-3">Prefer Step-by-Step Instructions?</h2>
           <p class="text-[var(--color-muted)] mb-6 max-w-xl mx-auto">
             Check out our guides for detailed walkthroughs of data broker opt-outs, state privacy laws, and more.
