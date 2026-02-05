@@ -1,0 +1,265 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const lastUpdated = "February 2026";
+---
+
+<Base
+  title="California DELETE Act & DROP Portal Guide"
+  description="Complete guide to using California's DROP portal for one-click data broker opt-outs. The DELETE Act (SB 362) requires data brokers to honor deletion requests."
+>
+  <article class="py-12 md:py-16">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <header class="mb-12">
+          <div class="flex items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+            <a href="/guides" class="hover:text-emerald-500">Guides</a>
+            <span>/</span>
+            <span>California DELETE Act</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">California DELETE Act & DROP Portal Guide</h1>
+          <p class="text-xl text-[var(--color-muted)]">
+            One request to delete your data from hundreds of brokers.
+          </p>
+          <p class="text-sm text-[var(--color-muted)] mt-4">Last updated: {lastUpdated}</p>
+        </header>
+
+        <div class="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8">
+          <p class="text-emerald-700 dark:text-emerald-300 font-medium mb-2">
+            Key Dates
+          </p>
+          <ul class="text-sm text-[var(--color-muted)] space-y-1">
+            <li><strong>January 1, 2024:</strong> DELETE Act (SB 362) signed into law</li>
+            <li><strong>August 1, 2026:</strong> DROP portal goes live</li>
+            <li><strong>45 days:</strong> Maximum time brokers have to process requests</li>
+          </ul>
+        </div>
+
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <h2 class="text-2xl font-bold mt-8 mb-4">What Is the DELETE Act?</h2>
+          <p class="text-[var(--color-muted)] mb-4">
+            The California Delete Act (SB 362), signed in October 2023, is the most significant data privacy
+            legislation since CCPA. It creates a single, free mechanism for consumers to request deletion
+            of their personal information from <strong>all registered data brokers at once</strong>.
+          </p>
+          <p class="text-[var(--color-muted)] mb-4">
+            Previously, opting out of data brokers meant visiting hundreds of individual websites, filling
+            out different forms, and tracking each request separately. The DELETE Act changes this by
+            creating a centralized portal called DROP (Data Broker Registry Opt-Out Portal).
+          </p>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">What Is the DROP Portal?</h2>
+          <p class="text-[var(--color-muted)] mb-4">
+            DROP (Data Broker Registry Opt-Out Portal) is a free service operated by the California
+            Privacy Protection Agency. When you submit a request through DROP:
+          </p>
+          <ol class="list-decimal pl-6 space-y-2 text-[var(--color-muted)] mb-4">
+            <li>Your deletion request is sent to <strong>all registered data brokers</strong></li>
+            <li>Brokers must process your request within <strong>45 days</strong></li>
+            <li>Brokers must delete your data and <strong>not re-collect it</strong> for one year</li>
+            <li>You can renew your request annually to maintain protection</li>
+          </ol>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Who Can Use DROP?</h2>
+          <p class="text-[var(--color-muted)] mb-4">
+            The DELETE Act applies to <strong>California residents</strong>. However, many data brokers
+            apply deletion requests nationwide rather than maintaining separate California-only processes.
+          </p>
+          <p class="text-[var(--color-muted)] mb-4">
+            You qualify if:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-[var(--color-muted)] mb-4">
+            <li>You currently reside in California, OR</li>
+            <li>You have a California address on file with data brokers</li>
+          </ul>
+
+          <div class="p-6 rounded-xl bg-amber-500/10 border border-amber-500/20 my-8">
+            <p class="text-amber-700 dark:text-amber-300 font-medium mb-2">
+              Not in California?
+            </p>
+            <p class="text-sm text-[var(--color-muted)]">
+              19 states now have comprehensive privacy laws. Check our
+              <a href="/tools/state-rights" class="text-emerald-500 hover:text-emerald-600">State Rights Lookup</a>
+              to see what protections you have.
+            </p>
+          </div>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">How to Use DROP (Step-by-Step)</h2>
+
+          <div class="space-y-6 my-8">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">1</div>
+              <div>
+                <h3 class="font-semibold text-lg mb-2">Visit the DROP Portal</h3>
+                <p class="text-[var(--color-muted)]">
+                  Go to the California Privacy Protection Agency website (link available August 2026).
+                  The portal will be free to use.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">2</div>
+              <div>
+                <h3 class="font-semibold text-lg mb-2">Verify Your Identity</h3>
+                <p class="text-[var(--color-muted)]">
+                  You'll need to confirm your identity. This typically requires:
+                </p>
+                <ul class="list-disc pl-6 mt-2 text-[var(--color-muted)]">
+                  <li>Full legal name</li>
+                  <li>Current and previous addresses</li>
+                  <li>Email addresses associated with your data</li>
+                  <li>Possibly additional verification (varies by implementation)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">3</div>
+              <div>
+                <h3 class="font-semibold text-lg mb-2">Submit Your Request</h3>
+                <p class="text-[var(--color-muted)]">
+                  Once verified, submit your deletion request. DROP will automatically send it to
+                  all registered data brokers (expected to be 500+).
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">4</div>
+              <div>
+                <h3 class="font-semibold text-lg mb-2">Wait for Processing</h3>
+                <p class="text-[var(--color-muted)]">
+                  Brokers have <strong>45 days</strong> to process your request. You'll receive
+                  confirmation when complete. Some brokers may contact you to verify specific records.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">5</div>
+              <div>
+                <h3 class="font-semibold text-lg mb-2">Renew Annually</h3>
+                <p class="text-[var(--color-muted)]">
+                  Brokers are prohibited from re-collecting your data for one year after deletion.
+                  Set a calendar reminder to renew your request annually for ongoing protection.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">What DROP Covers</h2>
+          <p class="text-[var(--color-muted)] mb-4">
+            All data brokers registered with California must participate in DROP. This includes companies that:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-[var(--color-muted)] mb-4">
+            <li><strong>People search sites:</strong> Spokeo, BeenVerified, Whitepages, etc.</li>
+            <li><strong>Marketing data companies:</strong> Acxiom, Epsilon, Oracle Data Cloud</li>
+            <li><strong>Background check aggregators:</strong> Various consumer data aggregators</li>
+            <li><strong>Location data brokers:</strong> Companies selling location history</li>
+          </ul>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">What DROP Doesn't Cover</h2>
+          <p class="text-[var(--color-muted)] mb-4">
+            The DELETE Act specifically targets data brokers. It does NOT cover:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-[var(--color-muted)] mb-4">
+            <li><strong>Companies you have a direct relationship with:</strong> Your bank, employer, doctor</li>
+            <li><strong>Government records:</strong> DMV, court records, property records</li>
+            <li><strong>Credit bureaus:</strong> Equifax, Experian, TransUnion (covered by FCRA)</li>
+            <li><strong>Social media platforms:</strong> Facebook, Instagram (you have accounts there)</li>
+          </ul>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Before DROP Goes Live</h2>
+          <p class="text-[var(--color-muted)] mb-4">
+            DROP launches in August 2026. Until then, you can still protect your privacy:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+            <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]">
+              <h3 class="font-semibold mb-2">Take Our Privacy Audit</h3>
+              <p class="text-sm text-[var(--color-muted)] mb-3">
+                Get a personalized action plan based on your risk level.
+              </p>
+              <a href="/tools/privacy-audit" class="text-emerald-500 hover:text-emerald-600 text-sm font-medium">
+                Start Audit →
+              </a>
+            </div>
+            <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)]">
+              <h3 class="font-semibold mb-2">Manual Opt-Outs</h3>
+              <p class="text-sm text-[var(--color-muted)] mb-3">
+                Start removing your data from major brokers now.
+              </p>
+              <a href="/guides/data-brokers" class="text-emerald-500 hover:text-emerald-600 text-sm font-medium">
+                View Guide →
+              </a>
+            </div>
+          </div>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Penalties for Non-Compliance</h2>
+          <p class="text-[var(--color-muted)] mb-4">
+            The DELETE Act has teeth. Data brokers who fail to comply face:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-[var(--color-muted)] mb-4">
+            <li><strong>$200 per day</strong> for failing to register with California</li>
+            <li><strong>Administrative fines</strong> for not processing deletion requests</li>
+            <li><strong>Enforcement actions</strong> from the California Privacy Protection Agency</li>
+          </ul>
+
+          <h2 class="text-2xl font-bold mt-8 mb-4">Frequently Asked Questions</h2>
+
+          <div class="space-y-6 my-8">
+            <div>
+              <h3 class="font-semibold mb-2">Is DROP really free?</h3>
+              <p class="text-[var(--color-muted)]">
+                Yes. The DELETE Act explicitly prohibits charging consumers for using DROP.
+                It's funded by registration fees that data brokers must pay.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-2">Will my data come back after deletion?</h3>
+              <p class="text-[var(--color-muted)]">
+                Brokers are prohibited from re-collecting your data for one year after deletion.
+                However, you should renew your request annually. New data sources may also emerge.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-2">Can I use DROP if I moved away from California?</h3>
+              <p class="text-[var(--color-muted)]">
+                You need to be a California resident at the time of the request. However, many
+                brokers apply deletions nationwide anyway. Check your current state's laws too.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-2">How is DROP different from paid services?</h3>
+              <p class="text-[var(--color-muted)]">
+                Paid services like DeleteMe manually submit opt-out requests to brokers individually.
+                DROP is a legal mandate—brokers MUST participate. However, paid services may still
+                be useful for ongoing monitoring and non-California coverage.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-2">What if a broker doesn't delete my data?</h3>
+              <p class="text-[var(--color-muted)]">
+                You can file a complaint with the California Privacy Protection Agency. They have
+                enforcement authority and can levy fines against non-compliant brokers.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mt-12">
+            <h3 class="font-semibold text-lg mb-2">We'll Update This Guide</h3>
+            <p class="text-sm text-[var(--color-muted)]">
+              When DROP goes live in August 2026, we'll update this guide with direct links,
+              screenshots, and any changes to the process. Bookmark this page or check back then.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</Base>

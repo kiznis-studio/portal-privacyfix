@@ -1,0 +1,127 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const tools = [
+  {
+    title: "Privacy Audit",
+    description: "Answer 8 questions and get a personalized action plan. Discover your risk level and prioritized next steps based on your situation.",
+    href: "/tools/privacy-audit",
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+    </svg>`,
+    tag: "Available",
+    tagColor: "emerald"
+  }
+];
+
+const comingSoon = [
+  {
+    title: "Opt-Out Tracker",
+    description: "Track your data broker removal progress. Get 45-day follow-up reminders and monitor your privacy improvements over time.",
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+    </svg>`
+  },
+  {
+    title: "State Rights Lookup",
+    description: "Find out exactly what privacy rights you have based on your state. 19 states now have comprehensive privacy laws—know yours.",
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+    </svg>`
+  },
+  {
+    title: "Breach Check",
+    description: "See if your email or phone has been exposed in known data breaches. Powered by Have I Been Pwned data.",
+    icon: `<svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>`
+  }
+];
+---
+
+<Base
+  title="Free Privacy Tools"
+  description="Free tools to protect your online privacy. Privacy audit, opt-out tracker, state rights lookup, and more. All data stays in your browser."
+>
+  <section class="py-12 md:py-16">
+    <div class="container">
+      <div class="max-w-4xl mx-auto">
+        <header class="mb-12">
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">Privacy Tools</h1>
+          <p class="text-xl text-[var(--color-muted)]">
+            Free tools to help you take back your privacy. All data stays in your browser.
+          </p>
+        </header>
+
+        <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <div>
+              <p class="font-medium text-emerald-700 dark:text-emerald-300">Your data never leaves your device</p>
+              <p class="text-sm text-[var(--color-muted)]">All calculations happen locally in your browser. We can't see your answers or results.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Available Tools -->
+        <div class="space-y-4 mb-16">
+          {tools.map((tool) => (
+            <a
+              href={tool.href}
+              class="block p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] hover:border-emerald-500/50 transition-colors"
+            >
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500" set:html={tool.icon} />
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h2 class="text-xl font-semibold">{tool.title}</h2>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500">
+                      {tool.tag}
+                    </span>
+                  </div>
+                  <p class="text-[var(--color-muted)]">{tool.description}</p>
+                </div>
+                <svg class="w-5 h-5 text-[var(--color-muted)] flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- Coming Soon -->
+        <div>
+          <h2 class="text-2xl font-bold mb-6">Coming Soon</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {comingSoon.map((tool) => (
+              <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] opacity-60">
+                <div class="w-12 h-12 rounded-xl bg-[var(--color-border)] flex items-center justify-center text-[var(--color-muted)] mb-4" set:html={tool.icon} />
+                <h3 class="font-semibold mb-2">{tool.title}</h3>
+                <p class="text-sm text-[var(--color-muted)]">{tool.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-16 p-8 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 text-center">
+          <h2 class="text-2xl font-bold mb-3">Prefer Step-by-Step Instructions?</h2>
+          <p class="text-[var(--color-muted)] mb-6 max-w-xl mx-auto">
+            Check out our guides for detailed walkthroughs of data broker opt-outs, state privacy laws, and more.
+          </p>
+          <a
+            href="/guides"
+            class="inline-flex items-center gap-2 px-6 py-3 border border-[var(--color-border)] hover:bg-[var(--color-card)] font-semibold rounded-lg transition-colors"
+          >
+            Browse Guides
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

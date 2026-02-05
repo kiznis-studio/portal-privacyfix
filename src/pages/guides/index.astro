@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const guides = [
+  {
+    title: "California DELETE Act & DROP Portal",
+    description: "Complete guide to using California's upcoming DROP portal for one-click data broker removal. Free, government-backed, covering 500+ brokers.",
+    href: "/guides/california-drop",
+    tag: "Featured",
+    tagColor: "emerald"
+  },
+  {
+    title: "Data Broker Opt-Out Guide",
+    description: "Step-by-step instructions for removing yourself from 12+ major data brokers. Direct links, difficulty ratings, and time estimates.",
+    href: "/guides/data-brokers",
+    tag: "Essential",
+    tagColor: "blue"
+  },
+  {
+    title: "Paid Services vs DIY Comparison",
+    description: "Should you pay $100-200/year or do it yourself? An honest breakdown of costs, time, and when each approach makes sense.",
+    href: "/guides/paid-vs-diy",
+    tag: "Decision Guide",
+    tagColor: "amber"
+  }
+];
+
+const comingSoon = [
+  {
+    title: "State Privacy Rights Lookup",
+    description: "Find out what privacy rights you have based on where you live. 19 states now have comprehensive privacy laws."
+  },
+  {
+    title: "Social Media Privacy Settings",
+    description: "Platform-by-platform guide to locking down Facebook, Instagram, LinkedIn, Twitter, and more."
+  },
+  {
+    title: "Credit Freeze Guide",
+    description: "How to freeze your credit at all three bureaus. Free, fast, and one of the most effective identity theft protections."
+  },
+  {
+    title: "Google & Apple Privacy Settings",
+    description: "Stop the biggest data collectors at the source. Complete walkthrough of Google Account and Apple ID privacy settings."
+  }
+];
+---
+
+<Base
+  title="Privacy Guides"
+  description="Free step-by-step guides for protecting your online privacy. Data broker opt-outs, state rights, California DELETE Act, and more."
+>
+  <section class="py-12 md:py-16">
+    <div class="container">
+      <div class="max-w-4xl mx-auto">
+        <header class="mb-12">
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">Privacy Guides</h1>
+          <p class="text-xl text-[var(--color-muted)]">
+            Step-by-step instructions to take back your privacy. No paywalls.
+          </p>
+        </header>
+
+        <!-- Available Guides -->
+        <div class="space-y-4 mb-16">
+          {guides.map((guide) => (
+            <a
+              href={guide.href}
+              class="block p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] hover:border-emerald-500/50 transition-colors"
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <div class="flex items-center gap-3 mb-2">
+                    <h2 class="text-xl font-semibold">{guide.title}</h2>
+                    <span class={`text-xs px-2 py-0.5 rounded-full ${
+                      guide.tagColor === 'emerald' ? 'bg-emerald-500/10 text-emerald-500' :
+                      guide.tagColor === 'blue' ? 'bg-blue-500/10 text-blue-500' :
+                      'bg-amber-500/10 text-amber-500'
+                    }`}>
+                      {guide.tag}
+                    </span>
+                  </div>
+                  <p class="text-[var(--color-muted)]">{guide.description}</p>
+                </div>
+                <svg class="w-5 h-5 text-[var(--color-muted)] flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- Coming Soon -->
+        <div>
+          <h2 class="text-2xl font-bold mb-6">Coming Soon</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {comingSoon.map((guide) => (
+              <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] opacity-60">
+                <h3 class="font-semibold mb-2">{guide.title}</h3>
+                <p class="text-sm text-[var(--color-muted)]">{guide.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-16 p-8 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20 text-center">
+          <h2 class="text-2xl font-bold mb-3">Not Sure Where to Start?</h2>
+          <p class="text-[var(--color-muted)] mb-6 max-w-xl mx-auto">
+            Take our 2-minute Privacy Audit. Answer a few questions and get a personalized
+            action plan based on your risk level.
+          </p>
+          <a
+            href="/tools/privacy-audit"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
+          >
+            Start Privacy Audit
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
