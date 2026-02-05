@@ -1,0 +1,543 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Privacy Audit"
+  description="Free privacy audit tool. Answer a few questions and get a personalized action plan to protect your personal data from data brokers."
+>
+  <section class="py-12 md:py-16">
+    <div class="container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-medium mb-4">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+            Free Tool
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">Privacy Audit</h1>
+          <p class="text-lg text-[var(--color-muted)]">
+            Answer a few questions to get a personalized action plan based on your privacy risk level.
+          </p>
+        </header>
+
+        <!-- Audit Tool Container -->
+        <div id="audit-tool" class="bg-[var(--color-card)] rounded-2xl border border-[var(--color-border)] overflow-hidden">
+          <!-- Progress Bar -->
+          <div class="px-6 py-4 border-b border-[var(--color-border)]">
+            <div class="flex items-center justify-between text-sm mb-2">
+              <span class="text-[var(--color-muted)]">Progress</span>
+              <span id="progress-text" class="font-medium">Question 1 of 8</span>
+            </div>
+            <div class="h-2 bg-[var(--color-border)] rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: 12.5%"></div>
+            </div>
+          </div>
+
+          <!-- Question Container -->
+          <div id="question-container" class="p-6 md:p-8">
+            <!-- Questions will be rendered here by JavaScript -->
+          </div>
+
+          <!-- Results Container (hidden initially) -->
+          <div id="results-container" class="p-6 md:p-8 hidden">
+            <!-- Results will be rendered here by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="mt-8 text-sm text-center text-[var(--color-muted)]">
+          This audit is for informational purposes only and does not constitute legal advice.
+          All data is processed locally in your browser and never sent to our servers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Privacy Audit Questions - all content is hardcoded and trusted
+    const questions = [
+      {
+        id: 'data-broker-awareness',
+        question: 'Have you ever searched for yourself on people-search sites like Spokeo, BeenVerified, or WhitePages?',
+        options: [
+          { value: 'never', label: 'Never', risk: 3 },
+          { value: 'once', label: 'Once, a while ago', risk: 2 },
+          { value: 'recently', label: 'Yes, recently', risk: 1 },
+          { value: 'regularly', label: 'Yes, and I regularly check', risk: 0 }
+        ]
+      },
+      {
+        id: 'optout-history',
+        question: 'Have you ever submitted opt-out requests to data brokers?',
+        options: [
+          { value: 'never', label: 'Never', risk: 3 },
+          { value: 'few', label: 'A few (1-5 sites)', risk: 2 },
+          { value: 'many', label: 'Many (6-20 sites)', risk: 1 },
+          { value: 'comprehensive', label: 'Comprehensive coverage (20+)', risk: 0 }
+        ]
+      },
+      {
+        id: 'home-ownership',
+        question: 'Do you own property or have your name on public property records?',
+        options: [
+          { value: 'yes', label: 'Yes', risk: 2 },
+          { value: 'no', label: 'No', risk: 0 },
+          { value: 'unsure', label: 'Not sure', risk: 1 }
+        ]
+      },
+      {
+        id: 'social-media',
+        question: 'How would you describe your social media privacy settings?',
+        options: [
+          { value: 'public', label: 'Mostly public profiles', risk: 3 },
+          { value: 'mixed', label: 'Mix of public and private', risk: 2 },
+          { value: 'private', label: 'Mostly private profiles', risk: 1 },
+          { value: 'none', label: 'I do not use social media', risk: 0 }
+        ]
+      },
+      {
+        id: 'breaches',
+        question: 'Have you checked if your email appears in known data breaches (e.g., on HaveIBeenPwned)?',
+        options: [
+          { value: 'never', label: 'Never', risk: 3 },
+          { value: 'once', label: 'Once, a while ago', risk: 2 },
+          { value: 'recently', label: 'Yes, recently', risk: 1 },
+          { value: 'regularly', label: 'Yes, and I monitor regularly', risk: 0 }
+        ]
+      },
+      {
+        id: 'state',
+        question: 'Which state do you live in?',
+        options: [
+          { value: 'california', label: 'California', risk: 0, hasLaws: true },
+          { value: 'virginia', label: 'Virginia', risk: 0, hasLaws: true },
+          { value: 'colorado', label: 'Colorado', risk: 0, hasLaws: true },
+          { value: 'connecticut', label: 'Connecticut', risk: 0, hasLaws: true },
+          { value: 'utah', label: 'Utah', risk: 0, hasLaws: true },
+          { value: 'texas', label: 'Texas', risk: 0, hasLaws: true },
+          { value: 'oregon', label: 'Oregon', risk: 0, hasLaws: true },
+          { value: 'other-with-laws', label: 'Other state with privacy laws', risk: 0, hasLaws: true },
+          { value: 'other', label: 'Other state / Not in US', risk: 1, hasLaws: false }
+        ]
+      },
+      {
+        id: 'concern-level',
+        question: 'What is your primary concern about data brokers?',
+        options: [
+          { value: 'stalking', label: 'Personal safety (stalking, harassment)', risk: 3 },
+          { value: 'identity', label: 'Identity theft', risk: 2 },
+          { value: 'spam', label: 'Spam and unwanted marketing', risk: 1 },
+          { value: 'principle', label: 'Privacy on principle', risk: 1 }
+        ]
+      },
+      {
+        id: 'time-commitment',
+        question: 'How much time can you dedicate to privacy protection?',
+        options: [
+          { value: 'minimal', label: 'Minimal (under 1 hour total)', risk: 0 },
+          { value: 'moderate', label: 'Moderate (1-4 hours)', risk: 0 },
+          { value: 'significant', label: 'Whatever it takes', risk: 0 }
+        ]
+      }
+    ];
+
+    // State
+    let currentQuestion = 0;
+    let answers = {};
+
+    // DOM Elements
+    const questionContainer = document.getElementById('question-container');
+    const resultsContainer = document.getElementById('results-container');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+
+    // Escape function for any dynamic content (defense in depth)
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Render current question using DOM methods
+    function renderQuestion() {
+      const q = questions[currentQuestion];
+      const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+      progressBar.style.width = progress + '%';
+      progressText.textContent = 'Question ' + (currentQuestion + 1) + ' of ' + questions.length;
+
+      // Clear container
+      questionContainer.innerHTML = '';
+
+      // Create question heading
+      const heading = document.createElement('h2');
+      heading.className = 'text-xl md:text-2xl font-bold mb-6';
+      heading.textContent = q.question;
+      questionContainer.appendChild(heading);
+
+      // Create options container
+      const optionsDiv = document.createElement('div');
+      optionsDiv.className = 'space-y-3';
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full p-4 text-left rounded-xl border border-[var(--color-border)] hover:border-emerald-500 hover:bg-emerald-500/5 transition-all';
+        if (answers[q.id] === opt.value) {
+          btn.classList.add('border-emerald-500', 'bg-emerald-500/10');
+        }
+        btn.dataset.value = opt.value;
+        btn.dataset.risk = opt.risk;
+        if (opt.hasLaws !== undefined) {
+          btn.dataset.hasLaws = opt.hasLaws;
+        }
+
+        const span = document.createElement('span');
+        span.className = 'font-medium';
+        span.textContent = opt.label;
+        btn.appendChild(span);
+
+        btn.addEventListener('click', function() { selectAnswer(this); });
+        optionsDiv.appendChild(btn);
+      });
+
+      questionContainer.appendChild(optionsDiv);
+
+      // Create navigation
+      const navDiv = document.createElement('div');
+      navDiv.className = 'flex justify-between mt-8';
+
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'px-6 py-2 rounded-lg border border-[var(--color-border)] hover:bg-[var(--color-card)] transition-colors';
+      if (currentQuestion === 0) {
+        prevBtn.className += ' opacity-50 cursor-not-allowed';
+        prevBtn.disabled = true;
+      }
+      prevBtn.innerHTML = '&larr; Back';
+      prevBtn.addEventListener('click', function() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          renderQuestion();
+        }
+      });
+      navDiv.appendChild(prevBtn);
+
+      const hintDiv = document.createElement('div');
+      hintDiv.className = 'text-sm text-[var(--color-muted)] self-center';
+      hintDiv.textContent = answers[q.id] ? 'Click an option or Next →' : 'Select an option';
+      navDiv.appendChild(hintDiv);
+
+      questionContainer.appendChild(navDiv);
+    }
+
+    // Handle answer selection
+    function selectAnswer(btn) {
+      const q = questions[currentQuestion];
+      const value = btn.dataset.value;
+      const risk = parseInt(btn.dataset.risk);
+      const hasLaws = btn.dataset.hasLaws;
+
+      answers[q.id] = value;
+      answers[q.id + '_risk'] = risk;
+      if (hasLaws !== undefined) {
+        answers[q.id + '_hasLaws'] = hasLaws === 'true';
+      }
+
+      // Brief delay for visual feedback
+      btn.classList.add('border-emerald-500', 'bg-emerald-500/10');
+
+      setTimeout(function() {
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }, 200);
+    }
+
+    // Calculate risk score and show results
+    function showResults() {
+      questionContainer.classList.add('hidden');
+      resultsContainer.classList.remove('hidden');
+      progressBar.style.width = '100%';
+      progressText.textContent = 'Complete!';
+
+      // Calculate total risk score
+      let totalRisk = 0;
+      let maxRisk = 0;
+
+      questions.forEach(function(q) {
+        const riskKey = q.id + '_risk';
+        if (answers[riskKey] !== undefined) {
+          totalRisk += answers[riskKey];
+        }
+        const maxQuestionRisk = Math.max.apply(null, q.options.map(function(o) { return o.risk; }));
+        maxRisk += maxQuestionRisk;
+      });
+
+      const riskPercentage = (totalRisk / maxRisk) * 100;
+
+      let riskLevel, riskColor, riskDescription;
+      if (riskPercentage < 25) {
+        riskLevel = 'Low';
+        riskColor = 'emerald';
+        riskDescription = 'You are already taking good steps to protect your privacy. Focus on maintaining your practices and filling any gaps.';
+      } else if (riskPercentage < 50) {
+        riskLevel = 'Moderate';
+        riskColor = 'amber';
+        riskDescription = 'You have some protection, but there is room for improvement. The action plan below will help you strengthen your privacy.';
+      } else if (riskPercentage < 75) {
+        riskLevel = 'High';
+        riskColor = 'orange';
+        riskDescription = 'Your personal information is likely widely available to data brokers. Taking action now can significantly reduce your exposure.';
+      } else {
+        riskLevel = 'Critical';
+        riskColor = 'red';
+        riskDescription = 'Your privacy exposure is significant. We recommend prioritizing the action items below, especially if you have safety concerns.';
+      }
+
+      // Generate personalized action plan
+      const actionPlan = generateActionPlan();
+
+      // Build results using DOM methods
+      resultsContainer.innerHTML = '';
+
+      // Header section
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'text-center mb-8';
+
+      const title = document.createElement('h2');
+      title.className = 'text-2xl md:text-3xl font-bold mb-4';
+      title.textContent = 'Your Privacy Risk Level';
+      headerDiv.appendChild(title);
+
+      const riskBadge = document.createElement('div');
+      riskBadge.className = 'inline-flex items-center gap-3 px-6 py-3 rounded-full text-xl font-bold mb-4 bg-' + riskColor + '-500/10 text-' + riskColor + '-600 dark:text-' + riskColor + '-400';
+      riskBadge.textContent = riskLevel + ' Risk';
+      headerDiv.appendChild(riskBadge);
+
+      const descP = document.createElement('p');
+      descP.className = 'text-[var(--color-muted)] max-w-lg mx-auto';
+      descP.textContent = riskDescription;
+      headerDiv.appendChild(descP);
+
+      resultsContainer.appendChild(headerDiv);
+
+      // Action plan section
+      const planSection = document.createElement('div');
+      planSection.className = 'mb-8';
+
+      const planTitle = document.createElement('h3');
+      planTitle.className = 'text-xl font-bold mb-4';
+      planTitle.textContent = 'Your Personalized Action Plan';
+      planSection.appendChild(planTitle);
+
+      const planList = document.createElement('div');
+      planList.className = 'space-y-4';
+
+      actionPlan.forEach(function(item, i) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)]';
+
+        const innerDiv = document.createElement('div');
+        innerDiv.className = 'flex items-start gap-4';
+
+        const numDiv = document.createElement('div');
+        numDiv.className = 'w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold flex-shrink-0';
+        numDiv.textContent = (i + 1).toString();
+        innerDiv.appendChild(numDiv);
+
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'flex-1';
+
+        const itemTitle = document.createElement('h4');
+        itemTitle.className = 'font-semibold mb-1';
+        itemTitle.textContent = item.title;
+        contentDiv.appendChild(itemTitle);
+
+        const itemDesc = document.createElement('p');
+        itemDesc.className = 'text-sm text-[var(--color-muted)] mb-2';
+        itemDesc.textContent = item.description;
+        contentDiv.appendChild(itemDesc);
+
+        if (item.link) {
+          const link = document.createElement('a');
+          link.href = item.link;
+          link.className = 'text-sm text-emerald-500 hover:text-emerald-600 font-medium';
+          link.textContent = item.linkText + ' →';
+          contentDiv.appendChild(link);
+        }
+
+        innerDiv.appendChild(contentDiv);
+
+        const prioritySpan = document.createElement('span');
+        prioritySpan.className = 'text-xs px-2 py-1 rounded-full ';
+        if (item.priority === 'high') {
+          prioritySpan.className += 'bg-red-500/10 text-red-600 dark:text-red-400';
+        } else if (item.priority === 'medium') {
+          prioritySpan.className += 'bg-amber-500/10 text-amber-600 dark:text-amber-400';
+        } else {
+          prioritySpan.className += 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400';
+        }
+        prioritySpan.textContent = item.priority;
+        innerDiv.appendChild(prioritySpan);
+
+        itemDiv.appendChild(innerDiv);
+        planList.appendChild(itemDiv);
+      });
+
+      planSection.appendChild(planList);
+      resultsContainer.appendChild(planSection);
+
+      // CTA box
+      const ctaDiv = document.createElement('div');
+      ctaDiv.className = 'p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-8';
+
+      const ctaTitle = document.createElement('h3');
+      ctaTitle.className = 'font-semibold text-lg mb-2';
+      ctaTitle.textContent = 'Want to track your progress?';
+      ctaDiv.appendChild(ctaTitle);
+
+      const ctaDesc = document.createElement('p');
+      ctaDesc.className = 'text-sm text-[var(--color-muted)] mb-4';
+      ctaDesc.textContent = 'Our Opt-Out Tracker helps you keep track of which data brokers you have submitted requests to, and reminds you to follow up after 45 days.';
+      ctaDiv.appendChild(ctaDesc);
+
+      const ctaLink = document.createElement('a');
+      ctaLink.href = '/tools/optout-tracker';
+      ctaLink.className = 'inline-flex items-center gap-2 text-emerald-500 hover:text-emerald-600 font-medium';
+      ctaLink.innerHTML = 'Try the Opt-Out Tracker <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>';
+      ctaDiv.appendChild(ctaLink);
+
+      resultsContainer.appendChild(ctaDiv);
+
+      // Restart button
+      const restartDiv = document.createElement('div');
+      restartDiv.className = 'text-center';
+
+      const restartBtn = document.createElement('button');
+      restartBtn.className = 'px-6 py-3 rounded-lg border border-[var(--color-border)] hover:bg-[var(--color-card)] transition-colors';
+      restartBtn.textContent = 'Start Over';
+      restartBtn.addEventListener('click', function() {
+        currentQuestion = 0;
+        answers = {};
+        resultsContainer.classList.add('hidden');
+        questionContainer.classList.remove('hidden');
+        renderQuestion();
+      });
+      restartDiv.appendChild(restartBtn);
+
+      resultsContainer.appendChild(restartDiv);
+
+      // Save results to localStorage
+      localStorage.setItem('privacyAuditResults', JSON.stringify({
+        answers: answers,
+        riskLevel: riskLevel,
+        riskPercentage: riskPercentage,
+        completedAt: new Date().toISOString()
+      }));
+    }
+
+    // Generate personalized action plan based on answers
+    function generateActionPlan() {
+      const plan = [];
+
+      // Check data breach status
+      if (answers['breaches'] === 'never') {
+        plan.push({
+          title: 'Check for data breaches',
+          description: 'Visit HaveIBeenPwned.com to see if your email appears in known data breaches. If it does, change passwords for affected accounts.',
+          link: 'https://haveibeenpwned.com',
+          linkText: 'Check HaveIBeenPwned',
+          priority: 'high'
+        });
+      }
+
+      // Never done opt-outs
+      if (answers['optout-history'] === 'never') {
+        plan.push({
+          title: 'Start with the big data brokers',
+          description: 'Begin by opting out of the largest people-search sites: Spokeo, BeenVerified, WhitePages, and PeopleFinder. These have the most data.',
+          link: '/guides/data-brokers',
+          linkText: 'See opt-out guides',
+          priority: 'high'
+        });
+      }
+
+      // California resident
+      if (answers['state'] === 'california') {
+        plan.push({
+          title: 'Use California\'s DROP portal',
+          description: 'As a California resident, you can use the new DELETE Request Online Portal (DROP) to submit opt-out requests to all registered data brokers at once.',
+          link: '/guides/california-drop',
+          linkText: 'Learn how to use DROP',
+          priority: 'high'
+        });
+      }
+
+      // State with privacy laws
+      if (answers['state_hasLaws'] === true && answers['state'] !== 'california') {
+        plan.push({
+          title: 'Know your state privacy rights',
+          description: 'Your state has privacy laws that give you specific rights. Learn what you can request from companies that collect your data.',
+          link: '/tools/state-rights',
+          linkText: 'Check your state rights',
+          priority: 'medium'
+        });
+      }
+
+      // Social media is public
+      if (answers['social-media'] === 'public' || answers['social-media'] === 'mixed') {
+        plan.push({
+          title: 'Audit your social media privacy',
+          description: 'Review privacy settings on Facebook, Instagram, LinkedIn, and Twitter. Limit who can see your posts and personal information.',
+          priority: 'medium'
+        });
+      }
+
+      // Property owner
+      if (answers['home-ownership'] === 'yes') {
+        plan.push({
+          title: 'Check property record exposure',
+          description: 'Property records are public, but some counties allow you to redact certain information. Also opt out of sites that aggregate property data.',
+          priority: 'medium'
+        });
+      }
+
+      // Safety concerns
+      if (answers['concern-level'] === 'stalking') {
+        plan.push({
+          title: 'Consider a data removal service',
+          description: 'For serious safety concerns, a paid service like DeleteMe or Incogni can provide more thorough and faster coverage than DIY.',
+          link: '/guides/paid-vs-diy',
+          linkText: 'Compare paid services',
+          priority: 'high'
+        });
+      }
+
+      // Minimal time
+      if (answers['time-commitment'] === 'minimal') {
+        plan.push({
+          title: 'Focus on highest-impact brokers',
+          description: 'With limited time, prioritize the 10 largest data brokers. Even partial coverage significantly reduces your exposure.',
+          priority: 'medium'
+        });
+      }
+
+      // Everyone should set up monitoring
+      plan.push({
+        title: 'Set up ongoing monitoring',
+        description: 'Data brokers re-acquire your information over time. Set a reminder to check and re-submit opt-outs every 6-12 months.',
+        priority: 'low'
+      });
+
+      return plan;
+    }
+
+    // Initialize
+    renderQuestion();
+  </script>
+</Base>
