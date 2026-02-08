@@ -25,20 +25,6 @@ const guides = [
   }
 ];
 
-const comingSoon = [
-  {
-    title: "Social Media Privacy Settings",
-    description: "Platform-by-platform guide to locking down Facebook, Instagram, LinkedIn, Twitter, and more."
-  },
-  {
-    title: "Credit Freeze Guide",
-    description: "How to freeze your credit at all three bureaus. Free, fast, and one of the most effective identity theft protections."
-  },
-  {
-    title: "Google & Apple Privacy Settings",
-    description: "Stop the biggest data collectors at the source. Complete walkthrough of Google Account and Apple ID privacy settings."
-  }
-];
 ---
 
 <Base
@@ -82,19 +68,6 @@ const comingSoon = [
               </div>
             </a>
           ))}
-        </div>
-
-        <!-- Coming Soon -->
-        <div>
-          <h2 class="text-2xl font-bold mb-6">Coming Soon</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {comingSoon.map((guide) => (
-              <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] opacity-60">
-                <h3 class="font-semibold mb-2">{guide.title}</h3>
-                <p class="text-sm text-[var(--color-muted)]">{guide.description}</p>
-              </div>
-            ))}
-          </div>
         </div>
 
         <!-- CTA -->

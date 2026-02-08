@@ -25,6 +25,13 @@ const tools = [
     href: "/tools/state-rights",
     icon: "map",
     status: "live"
+  },
+  {
+    title: "Breach Check",
+    description: "Check if your email has been exposed in data breaches and get response guidance.",
+    href: "/tools/breach-check",
+    icon: "shield-exclamation",
+    status: "live"
   }
 ];
 
@@ -172,7 +179,7 @@ const stats = [
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {tools.map(tool => (
           <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] hover:border-violet-500/50 transition-colors">
             <div class="w-12 h-12 rounded-lg bg-violet-500/10 flex items-center justify-center mb-4">
@@ -191,16 +198,17 @@ const stats = [
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                 </svg>
               )}
+              {tool.icon === "shield-exclamation" && (
+                <svg class="w-6 h-6 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              )}
             </div>
             <h3 class="font-semibold text-lg mb-2">{tool.title}</h3>
             <p class="text-[var(--color-muted)] text-sm mb-4">{tool.description}</p>
-            {tool.status === "coming-soon" ? (
-              <span class="text-sm text-[var(--color-muted)] italic">Coming soon</span>
-            ) : (
-              <a href={tool.href} class="text-violet-500 hover:text-violet-600 text-sm font-medium">
-                Try it free →
-              </a>
-            )}
+            <a href={tool.href} class="text-violet-500 hover:text-violet-600 text-sm font-medium">
+              Try it free →
+            </a>
           </div>
         ))}
       </div>

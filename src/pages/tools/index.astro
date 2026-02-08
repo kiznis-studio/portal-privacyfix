@@ -44,7 +44,6 @@ const tools = [
   }
 ];
 
-const comingSoon: typeof tools = [];
 ---
 
 <Base
@@ -97,20 +96,6 @@ const comingSoon: typeof tools = [];
               </div>
             </a>
           ))}
-        </div>
-
-        <!-- Coming Soon -->
-        <div>
-          <h2 class="text-2xl font-bold mb-6">Coming Soon</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {comingSoon.map((tool) => (
-              <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] opacity-60">
-                <div class="w-12 h-12 rounded-xl bg-[var(--color-border)] flex items-center justify-center text-[var(--color-muted)] mb-4" set:html={tool.icon} />
-                <h3 class="font-semibold mb-2">{tool.title}</h3>
-                <p class="text-sm text-[var(--color-muted)]">{tool.description}</p>
-              </div>
-            ))}
-          </div>
         </div>
 
         <!-- CTA -->
